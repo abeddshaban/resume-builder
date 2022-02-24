@@ -1,3 +1,5 @@
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 import React, { useState } from "react";
 import PDF from "../Components/PDF";
 
@@ -57,25 +59,142 @@ const Home = () => {
       <hr />
       <label>coutry: {data.contactInformation.Country} </label>
       <hr />
-      <input
-        type="text"
-        name="firstname"
-        value={data.profile.firstname}
-        onChange={(e) => {
-          const { value } = e.target;
-          setdata({
-            ...data,
-            profile: {
-              firstname: value,
-              lastname: data.profile.lastname,
-              email: data.profile.email,
-              phonenumber: data.profile.phonenumber,
-              JobCategory: data.profile.JobCategory,
-              selfDescription: data.profile.selfDescription,
-            },
-          });
+
+      <Box
+        component="form"
+        sx={{
+          "& .MuiTextField-root": { m: 1, width: "25ch" },
         }}
-      />
+        noValidate
+        autoComplete="off"
+      >
+        <TextField
+          required
+          id="outlined-required"
+          label="First Name"
+          variant="outlined"
+          value={data.profile.firstname}
+          onChange={(e) => {
+            const { value } = e.target;
+            setdata({
+              ...data,
+              profile: {
+                firstname: value,
+                lastname: data.profile.lastname,
+                email: data.profile.email,
+                phonenumber: data.profile.phonenumber,
+                JobCategory: data.profile.JobCategory,
+                selfDescription: data.profile.selfDescription,
+              },
+            });
+          }}
+        />
+        <TextField
+          required
+          id="outlined-required"
+          label="Second Name"
+          variant="outlined"
+          value={data.profile.lastname}
+          onChange={(e) => {
+            const { value } = e.target;
+            setdata({
+              ...data,
+              profile: {
+                firstname: data.profile.firstname,
+                lastname: value,
+                email: data.profile.email,
+                phonenumber: data.profile.phonenumber,
+                JobCategory: data.profile.JobCategory,
+                selfDescription: data.profile.selfDescription,
+              },
+            });
+          }}
+        />
+        <TextField
+          required
+          id="outlined-required"
+          label="Email"
+          variant="outlined"
+          value={data.profile.email}
+          onChange={(e) => {
+            const { value } = e.target;
+            setdata({
+              ...data,
+              profile: {
+                firstname: data.profile.firstname,
+                lastname: data.profile.lastname,
+                email: value,
+                phonenumber: data.profile.phonenumber,
+                JobCategory: data.profile.JobCategory,
+                selfDescription: data.profile.selfDescription,
+              },
+            });
+          }}
+        />
+        <TextField
+          required
+          id="outlined-required"
+          label="Phone Number"
+          variant="outlined"
+          value={data.profile.phonenumber}
+          onChange={(e) => {
+            const { value } = e.target;
+            setdata({
+              ...data,
+              profile: {
+                firstname: data.profile.firstname,
+                lastname: data.profile.lastname,
+                email: data.profile.email,
+                phonenumber: value,
+                JobCategory: data.profile.JobCategory,
+                selfDescription: data.profile.selfDescription,
+              },
+            });
+          }}
+        />
+        <TextField
+          required
+          id="outlined-required"
+          label="Job Category"
+          variant="outlined"
+          value={data.profile.JobCategory}
+          onChange={(e) => {
+            const { value } = e.target;
+            setdata({
+              ...data,
+              profile: {
+                firstname: data.profile.firstname,
+                lastname: data.profile.lastname,
+                email: data.profile.email,
+                phonenumber: data.profile.phonenumber,
+                JobCategory: value,
+                selfDescription: data.profile.selfDescription,
+              },
+            });
+          }}
+        />
+        <TextField
+          required
+          id="outlined-required"
+          label="Description"
+          variant="outlined"
+          value={data.profile.selfDescription}
+          onChange={(e) => {
+            const { value } = e.target;
+            setdata({
+              ...data,
+              profile: {
+                firstname: data.profile.firstname,
+                lastname: data.profile.lastname,
+                email: data.profile.email,
+                phonenumber: data.profile.phonenumber,
+                JobCategory: data.profile.JobCategory,
+                selfDescription: value,
+              },
+            });
+          }}
+        />
+      </Box>
       <button
         onClick={() => {
           setdata({
@@ -93,102 +212,6 @@ const Home = () => {
       >
         the name is mosbah123
       </button>
-
-      <input
-        type="text"
-        name="lasttname"
-        value={data.profile.lastname}
-        onChange={(e) => {
-          const { value } = e.target;
-          setdata({
-            ...data,
-            profile: {
-              firstname: data.profile.firstname,
-              lastname: value,
-              email: data.profile.email,
-              phonenumber: data.profile.phonenumber,
-              JobCategory: data.profile.JobCategory,
-              selfDescription: data.profile.selfDescription,
-            },
-          });
-        }}
-      />
-      <input
-        type="email"
-        name="email"
-        value={data.profile.email}
-        onChange={(e) => {
-          const { value } = e.target;
-          setdata({
-            ...data,
-            profile: {
-              firstname: data.profile.firstname,
-              lastname: data.profile.lastname,
-              email: value,
-              phonenumber: data.profile.phonenumber,
-              JobCategory: data.profile.JobCategory,
-              selfDescription: data.profile.selfDescription,
-            },
-          });
-        }}
-      />
-      <input
-        type="tel"
-        name="phonenumber"
-        value={data.profile.phonenumber}
-        onChange={(e) => {
-          const { value } = e.target;
-          setdata({
-            ...data,
-            profile: {
-              firstname: data.profile.firstname,
-              lastname: data.profile.lastname,
-              email: data.profile.email,
-              phonenumber: value,
-              JobCategory: data.profile.JobCategory,
-              selfDescription: data.profile.selfDescription,
-            },
-          });
-        }}
-      />
-      <input
-        type="text"
-        name="jobcategoty"
-        value={data.profile.JobCategory}
-        onChange={(e) => {
-          const { value } = e.target;
-          setdata({
-            ...data,
-            profile: {
-              firstname: data.profile.firstname,
-              lastname: data.profile.lastname,
-              email: data.profile.email,
-              phonenumber: data.profile.phonenumber,
-              JobCategory: value,
-              selfDescription: data.profile.selfDescription,
-            },
-          });
-        }}
-      />
-      <input
-        type="text"
-        name="selfDescription"
-        value={data.profile.selfDescription}
-        onChange={(e) => {
-          const { value } = e.target;
-          setdata({
-            ...data,
-            profile: {
-              firstname: data.profile.firstname,
-              lastname: data.profile.lastname,
-              email: data.profile.email,
-              phonenumber: data.profile.phonenumber,
-              JobCategory: data.profile.JobCategory,
-              selfDescription: value,
-            },
-          });
-        }}
-      />
       <hr />
       <PDF data={data} />
       <hr />
