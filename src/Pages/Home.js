@@ -55,55 +55,90 @@ const Home = () => {
       <hr />
       <label>email: {data.profile.email} </label>
       <hr />
-      <label>job: {data.profile.JobCategory} </label>
+      <label>coutry: {data.contactInformation.Country} </label>
       <hr />
-      <button
-        onClick={() => {
+      <input
+        type="text"
+        name="firstname"
+        value={data.profile.firstname}
+        onChange={(e) => {
+          const { value } = e.target;
+          //   setdata((prevState) => ({
+          //     ...prevState,
+          //     [name]: value,
+          //   }));
           setdata({
+            ...data,
             profile: {
-              firstname: "Mosbah",
+              firstname: value,
               lastname: data.profile.lastname,
               email: data.profile.email,
               phonenumber: data.profile.phonenumber,
               JobCategory: data.profile.JobCategory,
               selfDescription: data.profile.selfDescription,
             },
-            contactInformation: {
-              StreetAddress: data.contactInformation.StreetAddress,
-              City: data.contactInformation.City,
-              State: data.contactInformation.State,
-              Country: data.contactInformation.Country,
-            },
-            experience: {
-              company: data.experience.company,
-              role: data.experience.role,
-              StartDate: data.experience.StartDate,
-              EndDate: data.experience.EndDate,
-              responsibilitiesAccomplishments:
-                data.experience.responsibilitiesAccomplishments,
-              currentstate: {
-                currentlylyEmployed:
-                  data.experience.currentstate.currentlylyEmployed,
-                City: data.experience.currentstate.City,
-                State: data.experience.currentstate.State,
-                Country: data.experience.currentstate.Country,
-              },
-            },
-            skills: data.skills,
-            education: {
-              studyPlace: data.education.studyPlace,
-              major: data.education.major,
-              City: data.education.City,
-              State: data.education.State,
-              Country: data.education.Country,
-              graduationDate: data.education.graduationDate,
-              academicAchievements: data.education.academicAchievements,
-            },
-            languages: data.languages,
-            certificates: data.certificates,
-            awards: data.awards,
           });
         }}
+      />
+      <button
+        onClick={() => {
+          setdata({
+            ...data,
+            profile: {
+              firstname: "mosbah123",
+              lastname: data.profile.lastname,
+              email: data.profile.email,
+              phonenumber: data.profile.phonenumber,
+              JobCategory: data.profile.JobCategory,
+              selfDescription: data.profile.selfDescription,
+            },
+          });
+        }}
+        //   setdata({
+        //     profile: {
+        //       firstname: "Mosbah",
+        //       lastname: data.profile.lastname,
+        //       email: data.profile.email,
+        //       phonenumber: data.profile.phonenumber,
+        //       JobCategory: data.profile.JobCategory,
+        //       selfDescription: data.profile.selfDescription,
+        //     },
+        //     contactInformation: {
+        //       StreetAddress: data.contactInformation.StreetAddress,
+        //       City: data.contactInformation.City,
+        //       State: data.contactInformation.State,
+        //       Country: data.contactInformation.Country,
+        //     },
+        //     experience: {
+        //       company: data.experience.company,
+        //       role: data.experience.role,
+        //       StartDate: data.experience.StartDate,
+        //       EndDate: data.experience.EndDate,
+        //       responsibilitiesAccomplishments:
+        //         data.experience.responsibilitiesAccomplishments,
+        //       currentstate: {
+        //         currentlylyEmployed:
+        //           data.experience.currentstate.currentlylyEmployed,
+        //         City: data.experience.currentstate.City,
+        //         State: data.experience.currentstate.State,
+        //         Country: data.experience.currentstate.Country,
+        //       },
+        //     },
+        //     skills: data.skills,
+        //     education: {
+        //       studyPlace: data.education.studyPlace,
+        //       major: data.education.major,
+        //       City: data.education.City,
+        //       State: data.education.State,
+        //       Country: data.education.Country,
+        //       graduationDate: data.education.graduationDate,
+        //       academicAchievements: data.education.academicAchievements,
+        //     },
+        //     languages: data.languages,
+        //     certificates: data.certificates,
+        //     awards: data.awards,
+        //   });
+        // }}
       >
         the name is mosbah123
       </button>
