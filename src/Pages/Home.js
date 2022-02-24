@@ -63,10 +63,6 @@ const Home = () => {
         value={data.profile.firstname}
         onChange={(e) => {
           const { value } = e.target;
-          //   setdata((prevState) => ({
-          //     ...prevState,
-          //     [name]: value,
-          //   }));
           setdata({
             ...data,
             profile: {
@@ -94,55 +90,105 @@ const Home = () => {
             },
           });
         }}
-        //   setdata({
-        //     profile: {
-        //       firstname: "Mosbah",
-        //       lastname: data.profile.lastname,
-        //       email: data.profile.email,
-        //       phonenumber: data.profile.phonenumber,
-        //       JobCategory: data.profile.JobCategory,
-        //       selfDescription: data.profile.selfDescription,
-        //     },
-        //     contactInformation: {
-        //       StreetAddress: data.contactInformation.StreetAddress,
-        //       City: data.contactInformation.City,
-        //       State: data.contactInformation.State,
-        //       Country: data.contactInformation.Country,
-        //     },
-        //     experience: {
-        //       company: data.experience.company,
-        //       role: data.experience.role,
-        //       StartDate: data.experience.StartDate,
-        //       EndDate: data.experience.EndDate,
-        //       responsibilitiesAccomplishments:
-        //         data.experience.responsibilitiesAccomplishments,
-        //       currentstate: {
-        //         currentlylyEmployed:
-        //           data.experience.currentstate.currentlylyEmployed,
-        //         City: data.experience.currentstate.City,
-        //         State: data.experience.currentstate.State,
-        //         Country: data.experience.currentstate.Country,
-        //       },
-        //     },
-        //     skills: data.skills,
-        //     education: {
-        //       studyPlace: data.education.studyPlace,
-        //       major: data.education.major,
-        //       City: data.education.City,
-        //       State: data.education.State,
-        //       Country: data.education.Country,
-        //       graduationDate: data.education.graduationDate,
-        //       academicAchievements: data.education.academicAchievements,
-        //     },
-        //     languages: data.languages,
-        //     certificates: data.certificates,
-        //     awards: data.awards,
-        //   });
-        // }}
       >
         the name is mosbah123
       </button>
 
+      <input
+        type="text"
+        name="lasttname"
+        value={data.profile.lastname}
+        onChange={(e) => {
+          const { value } = e.target;
+          setdata({
+            ...data,
+            profile: {
+              firstname: data.profile.firstname,
+              lastname: value,
+              email: data.profile.email,
+              phonenumber: data.profile.phonenumber,
+              JobCategory: data.profile.JobCategory,
+              selfDescription: data.profile.selfDescription,
+            },
+          });
+        }}
+      />
+      <input
+        type="email"
+        name="email"
+        value={data.profile.email}
+        onChange={(e) => {
+          const { value } = e.target;
+          setdata({
+            ...data,
+            profile: {
+              firstname: data.profile.firstname,
+              lastname: data.profile.lastname,
+              email: value,
+              phonenumber: data.profile.phonenumber,
+              JobCategory: data.profile.JobCategory,
+              selfDescription: data.profile.selfDescription,
+            },
+          });
+        }}
+      />
+      <input
+        type="tel"
+        name="phonenumber"
+        value={data.profile.phonenumber}
+        onChange={(e) => {
+          const { value } = e.target;
+          setdata({
+            ...data,
+            profile: {
+              firstname: data.profile.firstname,
+              lastname: data.profile.lastname,
+              email: data.profile.email,
+              phonenumber: value,
+              JobCategory: data.profile.JobCategory,
+              selfDescription: data.profile.selfDescription,
+            },
+          });
+        }}
+      />
+      <input
+        type="text"
+        name="jobcategoty"
+        value={data.profile.JobCategory}
+        onChange={(e) => {
+          const { value } = e.target;
+          setdata({
+            ...data,
+            profile: {
+              firstname: data.profile.firstname,
+              lastname: data.profile.lastname,
+              email: data.profile.email,
+              phonenumber: data.profile.phonenumber,
+              JobCategory: value,
+              selfDescription: data.profile.selfDescription,
+            },
+          });
+        }}
+      />
+      <input
+        type="text"
+        name="selfDescription"
+        value={data.profile.selfDescription}
+        onChange={(e) => {
+          const { value } = e.target;
+          setdata({
+            ...data,
+            profile: {
+              firstname: data.profile.firstname,
+              lastname: data.profile.lastname,
+              email: data.profile.email,
+              phonenumber: data.profile.phonenumber,
+              JobCategory: data.profile.JobCategory,
+              selfDescription: value,
+            },
+          });
+        }}
+      />
       <hr />
       <PDF data={data} />
       <hr />

@@ -35,7 +35,44 @@ const PDF = ({ data }) => {
             <div className="header_div">
               {data.profile.firstname} {data.profile.lastname}
             </div>
-            <span className="header_span">{data.profile.phonenumber}</span>
+            <div className="header_text">
+              {data.profile.phonenumber === "" ? (
+                <span className="header_span">phone number</span>
+              ) : (
+                <span className="header_span">{data.profile.phonenumber}</span>
+              )}
+
+              <span className="header_span"> | </span>
+              {data.profile.phonenumber === "" ? (
+                <span className="header_span">email</span>
+              ) : (
+                <span className="header_span">{data.profile.email}</span>
+              )}
+
+              <span className="header_span"> | </span>
+              {data.profile.phonenumber === "" ? (
+                <span className="header_span">Street Address</span>
+              ) : (
+                <span className="header_span">
+                  {data.contactInformation.StreetAddress},
+                </span>
+              )}
+
+              {data.profile.phonenumber === "" ? (
+                <span className="header_span">City</span>
+              ) : (
+                <span className="header_span">
+                  {data.contactInformation.City},
+                </span>
+              )}
+              {data.profile.phonenumber === "" ? (
+                <span className="header_span">State</span>
+              ) : (
+                <span className="header_span">
+                  {data.contactInformation.State}
+                </span>
+              )}
+            </div>
           </div>
         </section>
 

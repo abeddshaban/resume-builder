@@ -32,8 +32,12 @@
 
 .header_span {
   display: block;
-  width: 100%;
   margin-top: 4px;
   font-size: 13px;
   line-height: 16px;
+  margin-right: 3px;
+}
+
+.header_text {
+  display: flex;
 }
