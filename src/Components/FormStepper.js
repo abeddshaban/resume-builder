@@ -2,10 +2,6 @@ import * as React from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
-import Stack from "@mui/material/Stack";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
 import Check from "@mui/icons-material/Check";
 import PersonIcon from "@mui/icons-material/Person";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
@@ -15,10 +11,7 @@ import SchoolIcon from "@mui/icons-material/School";
 import LanguageIcon from "@mui/icons-material/Language";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import CardMembershipIcon from "@mui/icons-material/CardMembership";
-import StepConnector, {
-  stepConnectorClasses,
-} from "@mui/material/StepConnector";
-import { Box, Button } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 
 import "./Styles/FormStepper.css";
 
@@ -70,31 +63,6 @@ QontoStepIcon.propTypes = {
    */
   completed: PropTypes.bool,
 };
-
-const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
-  [`&.${stepConnectorClasses.alternativeLabel}`]: {
-    top: 22,
-  },
-  [`&.${stepConnectorClasses.active}`]: {
-    [`& .${stepConnectorClasses.line}`]: {
-      backgroundImage:
-        "linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)",
-    },
-  },
-  [`&.${stepConnectorClasses.completed}`]: {
-    [`& .${stepConnectorClasses.line}`]: {
-      backgroundImage:
-        "linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)",
-    },
-  },
-  [`& .${stepConnectorClasses.line}`]: {
-    height: 3,
-    border: 0,
-    backgroundColor:
-      theme.palette.mode === "dark" ? theme.palette.grey[800] : "#eaeaf0",
-    borderRadius: 1,
-  },
-}));
 
 const ColorlibStepIconRoot = styled("div")(({ theme, ownerState }) => ({
   backgroundColor:
@@ -160,53 +128,7 @@ ColorlibStepIcon.propTypes = {
   icon: PropTypes.node,
 };
 
-const steps = [
-  "Profile",
-  "Summary",
-  "Experience",
-  "Skills",
-  "Education",
-  "Languages",
-  "Certificates",
-  "Awards",
-];
-
-const forms = [
-  {
-    label: "Select campaign settings",
-    description: `For each ad campaign that you create`,
-  },
-  {
-    label: "Create an ad group",
-    description: "An ad group contains one or more ",
-  },
-  {
-    label: "Create an ad",
-    description: `Try out different ad text to see`,
-  },
-  {
-    label: "Create an ad",
-    description: `4`,
-  },
-  {
-    label: "Create an ad",
-    description: `5`,
-  },
-  {
-    label: "Create an ad",
-    description: `6`,
-  },
-  {
-    label: "Create an ad",
-    description: `7`,
-  },
-  {
-    label: "Create an ad",
-    description: `8`,
-  },
-];
-
-export default function CustomizedSteppers() {
+function CustomizedSteppers() {
   const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
@@ -227,25 +149,228 @@ export default function CustomizedSteppers() {
     }
   };
 
+  const [data, setdata] = useState({
+    profile: {
+      firstname: "Abed Al Ghani",
+      lastname: "Shaaban",
+      email: "example@gmail.com",
+      phonenumber: "ex: 563278723",
+      JobCategory: "Job Category",
+      selfDescription: `A summation of relevant professional abilities, 
+      accomplishments, and personal qualities that make you the right
+       candidate for the job. Be sure to give your potential employer 
+       a relevant snapshot of who you are and what you can offer. Tailor
+        it to the position you're applying for, focusing on the most releva
+        nt qualifications for the job.
+        `,
+    },
+    contactInformation: {
+      StreetAddress: "street address",
+      City: "city",
+      State: "state",
+      Country: "country",
+    },
+    experience: {
+      company: "Company, organization or volunteer group",
+      role: "Role or job title",
+      StartDate: "",
+      EndDate: "",
+      responsibilitiesAccomplishments: "",
+      currentstate: {
+        currentlylyEmployed: false,
+        City: "city",
+        State: "state",
+        Country: "country",
+      },
+    },
+    education: {
+      studyPlace: "where did u study",
+      major: "What did you study?",
+      City: "city",
+      State: "state",
+      Country: "country",
+      graduationDate: "Graduation Date",
+      academicAchievements: "academic achievements",
+    },
+    skills: "",
+    languages: "",
+    certificates: "",
+    awards: "",
+  });
+  console.log(data);
+  const forms = [
+    {
+      label: "Profile",
+      input: (
+        <>
+          <TextField
+            required
+            id="outlined-required"
+            label="First Name"
+            variant="outlined"
+            value={data.profile.firstname}
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                profile: {
+                  firstname: value,
+                  lastname: data.profile.lastname,
+                  email: data.profile.email,
+                  phonenumber: data.profile.phonenumber,
+                  JobCategory: data.profile.JobCategory,
+                  selfDescription: data.profile.selfDescription,
+                },
+              });
+            }}
+          />
+          <TextField
+            required
+            id="outlined-required"
+            label="Second Name"
+            variant="outlined"
+            value={data.profile.lastname}
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                profile: {
+                  firstname: data.profile.firstname,
+                  lastname: value,
+                  email: data.profile.email,
+                  phonenumber: data.profile.phonenumber,
+                  JobCategory: data.profile.JobCategory,
+                  selfDescription: data.profile.selfDescription,
+                },
+              });
+            }}
+          />
+          <TextField
+            required
+            id="outlined-required"
+            label="Email"
+            variant="outlined"
+            value={data.profile.email}
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                profile: {
+                  firstname: data.profile.firstname,
+                  lastname: data.profile.lastname,
+                  email: value,
+                  phonenumber: data.profile.phonenumber,
+                  JobCategory: data.profile.JobCategory,
+                  selfDescription: data.profile.selfDescription,
+                },
+              });
+            }}
+          />
+          <TextField
+            required
+            id="outlined-required"
+            label="Phone Number"
+            variant="outlined"
+            value={data.profile.phonenumber}
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                profile: {
+                  firstname: data.profile.firstname,
+                  lastname: data.profile.lastname,
+                  email: data.profile.email,
+                  phonenumber: value,
+                  JobCategory: data.profile.JobCategory,
+                  selfDescription: data.profile.selfDescription,
+                },
+              });
+            }}
+          />
+          <TextField
+            required
+            id="outlined-required"
+            label="Job Category"
+            variant="outlined"
+            value={data.profile.JobCategory}
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                profile: {
+                  firstname: data.profile.firstname,
+                  lastname: data.profile.lastname,
+                  email: data.profile.email,
+                  phonenumber: data.profile.phonenumber,
+                  JobCategory: value,
+                  selfDescription: data.profile.selfDescription,
+                },
+              });
+            }}
+          />
+          <TextField
+            required
+            id="outlined-required"
+            label="Description"
+            variant="outlined"
+            value={data.profile.selfDescription}
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                profile: {
+                  firstname: data.profile.firstname,
+                  lastname: data.profile.lastname,
+                  email: data.profile.email,
+                  phonenumber: data.profile.phonenumber,
+                  JobCategory: data.profile.JobCategory,
+                  selfDescription: value,
+                },
+              });
+            }}
+          />
+        </>
+      ),
+    },
+    {
+      label: "Summary",
+      input: <></>,
+    },
+    ,
+    {
+      label: "Experience",
+      input: <></>,
+    },
+    ,
+    {
+      label: "Skills",
+      input: <></>,
+    },
+    ,
+    {
+      label: "Education",
+      input: <></>,
+    },
+    ,
+    {
+      label: "Languages",
+      input: <></>,
+    },
+    ,
+    {
+      label: "Certificates",
+      input: <></>,
+    },
+    ,
+    {
+      label: "Awards",
+      input: <></>,
+    },
+  ];
   return (
     <div className="form_stepper">
-      {/* <Stack sx={{ width: "100%" }} spacing={4}>
-        <Stepper
-          alternativeLabel
-          activeStep={activeStep}
-          connector={<ColorlibConnector />}
-        >
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel StepIconComponent={ColorlibStepIcon}>
-                {label}
-              </StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-      </Stack> */}
-
       <Box
+        className="center_text"
         component="form"
         sx={{
           "& .MuiTextField-root": { m: 1, width: "25ch" },
@@ -253,11 +378,8 @@ export default function CustomizedSteppers() {
         noValidate
         autoComplete="off"
       >
-        <h2>hi</h2>
-        {forms[activeStep].label}
-        <br />
-        {forms[activeStep].description}
-        <h2>hi</h2>
+        <div>{forms[activeStep].label}</div>
+        <div>{forms[activeStep].input}</div>
       </Box>
 
       <footer className="navbar_footer">
@@ -298,3 +420,5 @@ export default function CustomizedSteppers() {
     </div>
   );
 }
+
+export default CustomizedSteppers;

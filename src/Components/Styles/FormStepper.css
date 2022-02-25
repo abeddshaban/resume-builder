@@ -4,9 +4,12 @@
 
 .navbar_footer {
   width: 100%;
-  background-color: aqua;
   display: flex;
   justify-content: space-evenly;
   bottom: 0;
   margin-top: 50px;
+}
+
+.center_text {
+  text-align: center;
 }
