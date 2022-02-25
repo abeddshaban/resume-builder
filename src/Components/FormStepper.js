@@ -18,9 +18,9 @@ import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import StepConnector, {
   stepConnectorClasses,
 } from "@mui/material/StepConnector";
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
-import "./Styles/NavBar.css";
+import "./Styles/FormStepper.css";
 
 const QontoStepIconRoot = styled("div")(({ theme, ownerState }) => ({
   color: theme.palette.mode === "dark" ? theme.palette.grey[700] : "#eaeaf0",
@@ -171,8 +171,44 @@ const steps = [
   "Awards",
 ];
 
+const forms = [
+  {
+    label: "Select campaign settings",
+    description: `For each ad campaign that you create`,
+  },
+  {
+    label: "Create an ad group",
+    description: "An ad group contains one or more ",
+  },
+  {
+    label: "Create an ad",
+    description: `Try out different ad text to see`,
+  },
+  {
+    label: "Create an ad",
+    description: `4`,
+  },
+  {
+    label: "Create an ad",
+    description: `5`,
+  },
+  {
+    label: "Create an ad",
+    description: `6`,
+  },
+  {
+    label: "Create an ad",
+    description: `7`,
+  },
+  {
+    label: "Create an ad",
+    description: `8`,
+  },
+];
+
 export default function CustomizedSteppers() {
   const [activeStep, setActiveStep] = useState(0);
+
   const handleNext = () => {
     if (activeStep === 7) {
       console.log("no more " + activeStep);
@@ -192,8 +228,8 @@ export default function CustomizedSteppers() {
   };
 
   return (
-    <>
-      <Stack sx={{ width: "100%" }} spacing={4}>
+    <div className="form_stepper">
+      {/* <Stack sx={{ width: "100%" }} spacing={4}>
         <Stepper
           alternativeLabel
           activeStep={activeStep}
@@ -207,7 +243,22 @@ export default function CustomizedSteppers() {
             </Step>
           ))}
         </Stepper>
-      </Stack>
+      </Stack> */}
+
+      <Box
+        component="form"
+        sx={{
+          "& .MuiTextField-root": { m: 1, width: "25ch" },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <h2>hi</h2>
+        {forms[activeStep].label}
+        <br />
+        {forms[activeStep].description}
+        <h2>hi</h2>
+      </Box>
 
       <footer className="navbar_footer">
         {activeStep === 0 ? (
@@ -244,6 +295,6 @@ export default function CustomizedSteppers() {
           </Button>
         )}
       </footer>
-    </>
+    </div>
   );
 }

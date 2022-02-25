@@ -2,6 +2,8 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import React, { useState } from "react";
 import PDF from "../Components/PDF";
+import Stepper from "../Components/Stepper";
+import "./Styles/Home.css";
 
 const Home = () => {
   const [data, setdata] = useState({
@@ -11,8 +13,13 @@ const Home = () => {
       email: "example@gmail.com",
       phonenumber: "ex: 563278723",
       JobCategory: "Job Category",
-      selfDescription:
-        "A summation of relevant professional abilities, accomplishments, and personal qualities that make you the right candidate for the job. Be sure to give your potential employer a relevant snapshot of who you are and what you can offer. Tailor it to the position you're applying for, focusing on the most relevant qualifications for the job.",
+      selfDescription: `A summation of relevant professional abilities, 
+      accomplishments, and personal qualities that make you the right
+       candidate for the job. Be sure to give your potential employer 
+       a relevant snapshot of who you are and what you can offer. Tailor
+        it to the position you're applying for, focusing on the most releva
+        nt qualifications for the job.
+        `,
     },
     contactInformation: {
       StreetAddress: "street address",
@@ -50,16 +57,7 @@ const Home = () => {
   });
   console.log(data);
   return (
-    <div>
-      <label>
-        name: {data.profile.firstname} {data.profile.lastname}
-      </label>
-      <hr />
-      <label>email: {data.profile.email} </label>
-      <hr />
-      <label>coutry: {data.contactInformation.Country} </label>
-      <hr />
-
+    <div className="home_div">
       <Box
         component="form"
         sx={{
@@ -212,6 +210,7 @@ const Home = () => {
       >
         the name is mosbah123
       </button>
+      <Stepper />
       <hr />
       <PDF data={data} />
       <hr />

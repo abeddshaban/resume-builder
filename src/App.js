@@ -1,12 +1,12 @@
 import "./App.css";
 import Home from "./Pages/Home";
-import Nav from "./Components/NavBar";
+import FormStepper from "./Components/FormStepper";
 
 function App() {
   return (
     <div className="App">
       <br />
-      {/* <Nav /> */}
+      <FormStepper />
       <Home />
     </div>
   );
