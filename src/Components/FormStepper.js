@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
@@ -12,6 +12,7 @@ import LanguageIcon from "@mui/icons-material/Language";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import { Box, Button, TextField } from "@mui/material";
+import Checkbox from "@mui/material/Checkbox";
 
 import "./Styles/FormStepper.css";
 
@@ -128,8 +129,13 @@ ColorlibStepIcon.propTypes = {
   icon: PropTypes.node,
 };
 
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
+
 function CustomizedSteppers() {
   const [activeStep, setActiveStep] = useState(0);
+
+  const [checked, setChecked] = useState(false);
+  const toggleChecked = () => setChecked((value) => !value);
 
   const handleNext = () => {
     if (activeStep === 7) {
@@ -177,7 +183,7 @@ function CustomizedSteppers() {
       EndDate: "",
       responsibilitiesAccomplishments: "",
       currentstate: {
-        currentlylyEmployed: false,
+        currentlylyEmployed: Boolean,
         City: "city",
         State: "state",
         Country: "country",
@@ -334,37 +340,385 @@ function CustomizedSteppers() {
     },
     {
       label: "Summary",
-      input: <></>,
+      input: (
+        <>
+          <TextField
+            id="outlined-required"
+            label="Street Address"
+            variant="outlined"
+            value={data.contactInformation.StreetAddress}
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                contactInformation: {
+                  StreetAddress: value,
+                  City: data.contactInformation.City,
+                  State: data.contactInformation.State,
+                  Country: data.contactInformation.Country,
+                },
+              });
+            }}
+          />
+          <TextField
+            id="outlined-required"
+            label="City"
+            variant="outlined"
+            value={data.contactInformation.City}
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                contactInformation: {
+                  StreetAddress: data.contactInformation.StreetAddress,
+                  City: value,
+                  State: data.contactInformation.State,
+                  Country: data.contactInformation.Country,
+                },
+              });
+            }}
+          />
+          <TextField
+            id="outlined-required"
+            label="State"
+            variant="outlined"
+            value={data.contactInformation.State}
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                contactInformation: {
+                  StreetAddress: data.contactInformation.StreetAddress,
+                  City: data.contactInformation.City,
+                  State: value,
+                  Country: data.contactInformation.Country,
+                },
+              });
+            }}
+          />
+          <TextField
+            id="outlined-required"
+            label="Country"
+            variant="outlined"
+            value={data.contactInformation.Country}
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                contactInformation: {
+                  StreetAddress: data.contactInformation.StreetAddress,
+                  City: data.contactInformation.City,
+                  State: data.contactInformation.State,
+                  Country: value,
+                },
+              });
+            }}
+          />
+        </>
+      ),
     },
-    ,
     {
       label: "Experience",
-      input: <></>,
+      input: (
+        <>
+          <TextField
+            id="outlined-required"
+            label="Company, organization, volunteer "
+            variant="outlined"
+            value={data.experience.company}
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                experience: {
+                  company: value,
+                  role: data.experience.role,
+                  StartDate: data.experience.StartDate,
+                  EndDate: data.experience.EndDate,
+                  responsibilitiesAccomplishments:
+                    data.experience.responsibilitiesAccomplishments,
+                  currentstate: {
+                    currentlylyEmployed:
+                      data.experience.currentstate.currentlylyEmployed,
+                    City: data.experience.currentstate.City,
+                    State: data.experience.currentstate.State,
+                    Country: data.experience.currentstate.Country,
+                  },
+                },
+              });
+            }}
+          />
+          <TextField
+            id="outlined-required"
+            label="Role or job title"
+            variant="outlined"
+            value={data.experience.role}
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                experience: {
+                  company: data.experience.company,
+                  role: value,
+                  StartDate: data.experience.StartDate,
+                  EndDate: data.experience.EndDate,
+                  responsibilitiesAccomplishments:
+                    data.experience.responsibilitiesAccomplishments,
+                  currentstate: {
+                    currentlylyEmployed:
+                      data.experience.currentstate.currentlylyEmployed,
+                    City: data.experience.currentstate.City,
+                    State: data.experience.currentstate.State,
+                    Country: data.experience.currentstate.Country,
+                  },
+                },
+              });
+            }}
+          />
+          <br />
+          <TextField
+            id="outlined-required"
+            label="Start Date"
+            variant="outlined"
+            value={data.experience.StartDate}
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                experience: {
+                  company: data.experience.company,
+                  role: data.experience.role,
+                  StartDate: value,
+                  EndDate: data.experience.EndDate,
+                  responsibilitiesAccomplishments:
+                    data.experience.responsibilitiesAccomplishments,
+                  currentstate: {
+                    currentlylyEmployed:
+                      data.experience.currentstate.currentlylyEmployed,
+                    City: data.experience.currentstate.City,
+                    State: data.experience.currentstate.State,
+                    Country: data.experience.currentstate.Country,
+                  },
+                },
+              });
+            }}
+          />
+          {checked === false ? (
+            <TextField
+              id="outlined-required"
+              label="End Date"
+              variant="outlined"
+              value={data.experience.EndDate}
+              onChange={(e) => {
+                const { value } = e.target;
+                setdata({
+                  ...data,
+                  experience: {
+                    company: data.experience.company,
+                    role: data.experience.role,
+                    StartDate: data.experience.StartDate,
+                    EndDate: value,
+                    responsibilitiesAccomplishments:
+                      data.experience.responsibilitiesAccomplishments,
+                    currentstate: {
+                      currentlylyEmployed:
+                        data.experience.currentstate.currentlylyEmployed,
+                      City: data.experience.currentstate.City,
+                      State: data.experience.currentstate.State,
+                      Country: data.experience.currentstate.Country,
+                    },
+                  },
+                });
+              }}
+            />
+          ) : (
+            <TextField
+              disabled
+              id="outlined-required"
+              label="End Date"
+              variant="filled"
+              value={data.experience.EndDate}
+              onChange={(e) => {
+                const { value } = e.target;
+                setdata({
+                  ...data,
+                  experience: {
+                    company: data.experience.company,
+                    role: data.experience.role,
+                    StartDate: data.experience.StartDate,
+                    EndDate: value,
+                    responsibilitiesAccomplishments:
+                      data.experience.responsibilitiesAccomplishments,
+                    currentstate: {
+                      currentlylyEmployed:
+                        data.experience.currentstate.currentlylyEmployed,
+                      City: data.experience.currentstate.City,
+                      State: data.experience.currentstate.State,
+                      Country: data.experience.currentstate.Country,
+                    },
+                  },
+                });
+              }}
+            />
+          )}
+
+          <br />
+          <Checkbox
+            {...label}
+            value={data.experience.currentstate.currentlylyEmployed}
+            onChange={() => {
+              setdata({
+                ...data,
+                experience: {
+                  company: data.experience.company,
+                  role: data.experience.role,
+                  StartDate: data.experience.StartDate,
+                  EndDate: data.experience.EndDate,
+                  responsibilitiesAccomplishments:
+                    data.experience.responsibilitiesAccomplishments,
+                  currentstate: {
+                    currentlylyEmployed: checked,
+                    City: data.experience.currentstate.City,
+                    State: data.experience.currentstate.State,
+                    Country: data.experience.currentstate.Country,
+                  },
+                },
+              });
+              toggleChecked();
+            }}
+          />
+          <span>currentlyly employed</span>
+
+          <br />
+          <TextField
+            id="outlined-required"
+            label="City"
+            variant="outlined"
+            value={data.experience.currentstate.City}
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                experience: {
+                  company: data.experience.company,
+                  role: data.experience.role,
+                  StartDate: data.experience.StartDate,
+                  EndDate: data.experience.EndDate,
+                  responsibilitiesAccomplishments:
+                    data.experience.responsibilitiesAccomplishments,
+                  currentstate: {
+                    currentlylyEmployed:
+                      data.experience.currentstate.currentlylyEmployed,
+                    City: value,
+                    State: data.experience.currentstate.State,
+                    Country: data.experience.currentstate.Country,
+                  },
+                },
+              });
+            }}
+          />
+          <TextField
+            id="outlined-required"
+            label="State"
+            variant="outlined"
+            value={data.experience.currentstate.State}
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                experience: {
+                  company: data.experience.company,
+                  role: data.experience.role,
+                  StartDate: data.experience.StartDate,
+                  EndDate: data.experience.EndDate,
+                  responsibilitiesAccomplishments:
+                    data.experience.responsibilitiesAccomplishments,
+                  currentstate: {
+                    currentlylyEmployed:
+                      data.experience.currentstate.currentlylyEmployed,
+                    City: data.experience.currentstate.City,
+                    State: value,
+                    Country: data.experience.currentstate.Country,
+                  },
+                },
+              });
+            }}
+          />
+          <TextField
+            id="outlined-required"
+            label="Country"
+            variant="outlined"
+            value={data.experience.currentstate.Country}
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                experience: {
+                  company: data.experience.company,
+                  role: data.experience.role,
+                  StartDate: data.experience.StartDate,
+                  EndDate: data.experience.EndDate,
+                  responsibilitiesAccomplishments:
+                    data.experience.responsibilitiesAccomplishments,
+                  currentstate: {
+                    currentlylyEmployed:
+                      data.experience.currentstate.currentlylyEmployed,
+                    City: data.experience.currentstate.City,
+                    State: data.experience.currentstate.State,
+                    Country: value,
+                  },
+                },
+              });
+            }}
+          />
+          <br />
+          <textarea
+            placeholder="Responsibilities and Accomplishments"
+            className="resize_input"
+            value={data.experience.responsibilitiesAccomplishments}
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                experience: {
+                  company: data.experience.company,
+                  role: data.experience.role,
+                  StartDate: data.experience.StartDate,
+                  EndDate: data.experience.EndDate,
+                  responsibilitiesAccomplishments: value,
+                  currentstate: {
+                    currentlylyEmployed:
+                      data.experience.currentstate.currentlylyEmployed,
+                    City: data.experience.currentstate.City,
+                    State: data.experience.currentstate.State,
+                    Country: data.experience.currentstate.Country,
+                  },
+                },
+              });
+            }}
+          />
+        </>
+      ),
     },
-    ,
     {
       label: "Skills",
-      input: <></>,
+      input: <>hi</>,
     },
-    ,
     {
       label: "Education",
-      input: <></>,
+      input: <>oki</>,
     },
-    ,
     {
       label: "Languages",
-      input: <></>,
+      input: <>nice</>,
     },
-    ,
     {
       label: "Certificates",
-      input: <></>,
+      input: <>no</>,
     },
-    ,
     {
       label: "Awards",
-      input: <></>,
+      input: <>none</>,
     },
   ];
   return (
@@ -382,7 +736,7 @@ function CustomizedSteppers() {
         <div>{forms[activeStep].input}</div>
       </Box>
 
-      <footer className="navbar_footer">
+      <footer className="form_footer">
         {activeStep === 0 ? (
           <Button className="nav_btn" variant="outlined" size="medium" disabled>
             Back
