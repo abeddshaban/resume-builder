@@ -1,4 +1,5 @@
 import { Box, Button, Card, TextField } from "@mui/material";
+import { Link } from "react-router-dom";
 import "./Styles/Login.css";
 
 const Login = () => {
@@ -32,7 +33,9 @@ const Login = () => {
             />
           </div>
           <div className="contentcenter margintop20">
-            <Button variant="outlined">cancel</Button>
+            <Link to="/" className="link">
+              <Button variant="outlined">cancel</Button>
+            </Link>
             <Button variant="outlined">login</Button>
           </div>
         </Card>
