@@ -13,6 +13,7 @@ import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import { Box, Button, TextField } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
+import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 
 import "./Styles/FormStepper.css";
 
@@ -132,6 +133,344 @@ ColorlibStepIcon.propTypes = {
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function CustomizedSteppers() {
+  const skillsdic = [
+    {
+      name: "HTML",
+    },
+    {
+      name: "CSS",
+    },
+    {
+      name: "CSS tools",
+    },
+    {
+      name: "Photoshop",
+    },
+    {
+      name: "JavaScript",
+    },
+    {
+      name: "Java",
+    },
+    {
+      name: "JavaFX",
+    },
+    {
+      name: "NodeJS",
+    },
+    {
+      name: "Go",
+    },
+    {
+      name: "Python",
+    },
+    {
+      name: "NumPy",
+    },
+    {
+      name: "Scrum",
+    },
+    {
+      name: "Coaching",
+    },
+    {
+      name: "Machine Learning",
+    },
+    {
+      name: "UI/UX Design",
+    },
+    {
+      name: "React",
+    },
+    {
+      name: "Search Engine Optimization",
+    },
+    {
+      name: "Project Coordination",
+    },
+    {
+      name: "Stakeholder Engagement",
+    },
+    {
+      name: "Microsoft Excel",
+    },
+    {
+      name: "Microsoft Outlook",
+    },
+    {
+      name: "Microsoft Word",
+    },
+    {
+      name: "Commercial Awareness",
+    },
+    {
+      name: "Robot Framework",
+    },
+    {
+      name: "Scaled Agile Framework",
+    },
+    {
+      name: "Test-driven development",
+    },
+    {
+      name: "Conflict resolution",
+    },
+    {
+      name: "Negotiation",
+    },
+    {
+      name: "HR Policies",
+    },
+    {
+      name: "Spring framework",
+    },
+    {
+      name: "Git",
+    },
+    {
+      name: "Docker",
+    },
+    {
+      name: "Redis",
+    },
+    {
+      name: "Jira",
+    },
+    {
+      name: "PostgreSQL",
+    },
+    {
+      name: "Facilitation",
+    },
+    {
+      name: "Building Trust",
+    },
+    {
+      name: "Professional Networking",
+    },
+    {
+      name: "Identifying External Influences",
+    },
+    {
+      name: "Managing Talent",
+    },
+    {
+      name: "Creating Company Culture",
+    },
+    {
+      name: "Effective Listening",
+    },
+    {
+      name: "Being Approachable & Accessible",
+    },
+    {
+      name: "Change Management",
+    },
+    {
+      name: "Persuasion",
+    },
+    {
+      name: "Negotiating",
+    },
+    {
+      name: "Problem-Solving",
+    },
+    {
+      name: "Training",
+    },
+    {
+      name: "Consulting",
+    },
+  ];
+
+  const languagesdic = [
+    { language: "Abkhaz" },
+    { language: "Afar" },
+    { language: "Afrikaans" },
+    { language: "Akan" },
+    { language: "Albanian" },
+    { language: "Amharic" },
+    { language: "Arabic" },
+    { language: "Aragonese" },
+    { language: "Armenian" },
+    { language: "Assamese" },
+    { language: "Avaric" },
+    { language: "Avestan" },
+    { language: "Aymara" },
+    { language: "Azerbaijani" },
+    { language: "Bambara" },
+    { language: "Bashkir" },
+    { language: "Basque" },
+    { language: "Belarusian" },
+    { language: "Bengali" },
+    { language: "Bihari" },
+    { language: "Bislama" },
+    { language: "Bosnian" },
+    { language: "Breton" },
+    { language: "Bulgarian" },
+    { language: "Burmese" },
+    { language: "Catalan; Valencian" },
+    { language: "Chamorro" },
+    { language: "Chechen" },
+    { language: "Chichewa; Chewa; Nyanja" },
+    { language: "Chinese" },
+    { language: "Chuvash" },
+    { language: "Cornish" },
+    { language: "Corsican" },
+    { language: "Cree" },
+    { language: "Croatian" },
+    { language: "Czech" },
+    { language: "Danish" },
+    { language: "Divehi; Dhivehi; Maldivian;" },
+    { language: "Dutch" },
+    { language: "English" },
+    { language: "Esperanto" },
+    { language: "Estonian" },
+    { language: "Ewe" },
+    { language: "Faroese" },
+    { language: "Fijian" },
+    { language: "Finnish" },
+    { language: "French" },
+    { language: "Fula; Fulah; Pulaar; Pular" },
+    { language: "Galician" },
+    { language: "Georgian" },
+    { language: "German" },
+    { language: "Greek, Modern" },
+    { language: "Guaraní" },
+    { language: "Gujarati" },
+    { language: "Haitian; Haitian Creole" },
+    { language: "Hausa" },
+    { language: "Hebrew (modern)" },
+    { language: "Herero" },
+    { language: "Hindi" },
+    { language: "Hiri Motu" },
+    { language: "Hungarian" },
+    { language: "Interlingua" },
+    { language: "Indonesian" },
+    { language: "Interlingue" },
+    { language: "Irish" },
+    { language: "Igbo" },
+    { language: "Inupiaq" },
+    { language: "Ido" },
+    { language: "Icelandic" },
+    { language: "Italian" },
+    { language: "Inuktitut" },
+    { language: "Japanese" },
+    { language: "Javanese" },
+    { language: "Kalaallisut, Greenlandic" },
+    { language: "Kannada" },
+    { language: "Kanuri" },
+    { language: "Kashmiri" },
+    { language: "Kazakh" },
+    { language: "Khmer" },
+    { language: "Kikuyu, Gikuyu" },
+    { language: "Kinyarwanda" },
+    { language: "Kirghiz, Kyrgyz" },
+    { language: "Komi" },
+    { language: "Kongo" },
+    { language: "Korean" },
+    { language: "Kurdish" },
+    { language: "Kwanyama, Kuanyama" },
+    { language: "Latin" },
+    { language: "Luxembourgish, Letzeburgesch" },
+    { language: "Luganda" },
+    { language: "Limburgish, Limburgan, Limburger" },
+    { language: "Lingala" },
+    { language: "Lao" },
+    { language: "Lithuanian" },
+    { language: "Luba-Katanga" },
+    { language: "Latvian" },
+    { language: "Manx" },
+    { language: "Macedonian" },
+    { language: "Malagasy" },
+    { language: "Malay" },
+    { language: "Malayalam" },
+    { language: "Maltese" },
+    { language: "Māori" },
+    { language: "Marathi (Marāṭhī)" },
+    { language: "Marshallese" },
+    { language: "Mongolian" },
+    { language: "Nauru" },
+    { language: "Navajo, Navaho" },
+    { language: "Norwegian Bokmål" },
+    { language: "North Ndebele" },
+    { language: "Nepali" },
+    { language: "Ndonga" },
+    { language: "Norwegian Nynorsk" },
+    { language: "Norwegian" },
+    { language: "Nuosu" },
+    { language: "South Ndebele" },
+    { language: "Occitan" },
+    { language: "Ojibwe, Ojibwa" },
+    {
+      language:
+        "Old Church Slavonic, Church Slavic, Church Slavonic, Old Bulgarian, Old Slavonic",
+    },
+    { language: "Oromo" },
+    { language: "Oriya" },
+    { language: "Ossetian, Ossetic" },
+    { language: "Panjabi, Punjabi" },
+    { language: "Pāli" },
+    { language: "Persian" },
+    { language: "Polish" },
+    { language: "Pashto, Pushto" },
+    { language: "Portuguese" },
+    { language: "Quechua" },
+    { language: "Romansh" },
+    { language: "Kirundi" },
+    { language: "Romanian, Moldavian, Moldovan" },
+    { language: "Russian" },
+    { language: "Sanskrit (Saṁskṛta)" },
+    { language: "Sardinian" },
+    { language: "Sindhi" },
+    { language: "Northern Sami" },
+    { language: "Samoan" },
+    { language: "Sango" },
+    { language: "Serbian" },
+    { language: "Scottish Gaelic; Gaelic" },
+    { language: "Shona" },
+    { language: "Sinhala, Sinhalese" },
+    { language: "Slovak" },
+    { language: "Slovene" },
+    { language: "Somali" },
+    { language: "Southern Sotho" },
+    { language: "Spanish; Castilian" },
+    { language: "Sundanese" },
+    { language: "Swahili" },
+    { language: "Swati" },
+    { language: "Swedish" },
+    { language: "Tamil" },
+    { language: "Telugu" },
+    { language: "Tajik" },
+    { language: "Thai" },
+    { language: "Tigrinya" },
+    { language: "Tibetan Standard, Tibetan, Central" },
+    { language: "Turkmen" },
+    { language: "Tagalog" },
+    { language: "Tswana" },
+    { language: "Tonga (Tonga Islands)" },
+    { language: "Turkish" },
+    { language: "Tsonga" },
+    { language: "Tatar" },
+    { language: "Twi" },
+    { language: "Tahitian" },
+    { language: "Uighur, Uyghur" },
+    { language: "Ukrainian" },
+    { language: "Urdu" },
+    { language: "Uzbek" },
+    { language: "Venda" },
+    { language: "Vietnamese" },
+    { language: "Volapük" },
+    { language: "Walloon" },
+    { language: "Welsh" },
+    { language: "Wolof" },
+    { language: "Western Frisian" },
+    { language: "Xhosa" },
+    { language: "Yiddish" },
+    { language: "Yoruba" },
+    { language: "Zhuang, Chuang" },
+  ];
+
   const [activeStep, setActiveStep] = useState(0);
 
   const [checked, setChecked] = useState(false);
@@ -183,7 +522,7 @@ function CustomizedSteppers() {
       EndDate: "",
       responsibilitiesAccomplishments: "",
       currentstate: {
-        currentlylyEmployed: Boolean,
+        currentlylyEmployed: true,
         City: "city",
         State: "state",
         Country: "country",
@@ -198,10 +537,10 @@ function CustomizedSteppers() {
       graduationDate: "Graduation Date",
       academicAchievements: "academic achievements",
     },
-    skills: "",
-    languages: "",
-    certificates: "",
-    awards: "",
+    skills: [],
+    languages: [],
+    certificates: [],
+    awards: [],
   });
   console.log(data);
   const forms = [
@@ -422,10 +761,10 @@ function CustomizedSteppers() {
       input: (
         <>
           <TextField
+            value={data.experience.company}
             id="outlined-required"
             label="Company, organization, volunteer "
             variant="outlined"
-            value={data.experience.company}
             onChange={(e) => {
               const { value } = e.target;
               setdata({
@@ -449,10 +788,10 @@ function CustomizedSteppers() {
             }}
           />
           <TextField
+            value={data.experience.role}
             id="outlined-required"
             label="Role or job title"
             variant="outlined"
-            value={data.experience.role}
             onChange={(e) => {
               const { value } = e.target;
               setdata({
@@ -477,10 +816,10 @@ function CustomizedSteppers() {
           />
           <br />
           <TextField
+            value={data.experience.StartDate}
             id="outlined-required"
             label="Start Date"
             variant="outlined"
-            value={data.experience.StartDate}
             onChange={(e) => {
               const { value } = e.target;
               setdata({
@@ -503,12 +842,12 @@ function CustomizedSteppers() {
               });
             }}
           />
-          {checked === false ? (
+          {checked === true ? (
             <TextField
+              value={data.experience.EndDate}
               id="outlined-required"
               label="End Date"
               variant="outlined"
-              value={data.experience.EndDate}
               onChange={(e) => {
                 const { value } = e.target;
                 setdata({
@@ -533,11 +872,11 @@ function CustomizedSteppers() {
             />
           ) : (
             <TextField
+              value={data.experience.EndDate}
               disabled
               id="outlined-required"
               label="End Date"
               variant="filled"
-              value={data.experience.EndDate}
               onChange={(e) => {
                 const { value } = e.target;
                 setdata({
@@ -564,8 +903,8 @@ function CustomizedSteppers() {
 
           <br />
           <Checkbox
+            checked={data.experience.currentstate.currentlylyEmployed}
             {...label}
-            value={data.experience.currentstate.currentlylyEmployed}
             onChange={() => {
               setdata({
                 ...data,
@@ -591,10 +930,10 @@ function CustomizedSteppers() {
 
           <br />
           <TextField
+            value={data.experience.currentstate.City}
             id="outlined-required"
             label="City"
             variant="outlined"
-            value={data.experience.currentstate.City}
             onChange={(e) => {
               const { value } = e.target;
               setdata({
@@ -618,10 +957,10 @@ function CustomizedSteppers() {
             }}
           />
           <TextField
+            value={data.experience.currentstate.State}
             id="outlined-required"
             label="State"
             variant="outlined"
-            value={data.experience.currentstate.State}
             onChange={(e) => {
               const { value } = e.target;
               setdata({
@@ -645,10 +984,10 @@ function CustomizedSteppers() {
             }}
           />
           <TextField
+            value={data.experience.currentstate.Country}
             id="outlined-required"
             label="Country"
             variant="outlined"
-            value={data.experience.currentstate.Country}
             onChange={(e) => {
               const { value } = e.target;
               setdata({
@@ -673,9 +1012,9 @@ function CustomizedSteppers() {
           />
           <br />
           <textarea
+            value={data.experience.responsibilitiesAccomplishments}
             placeholder="Responsibilities and Accomplishments"
             className="resize_input"
-            value={data.experience.responsibilitiesAccomplishments}
             onChange={(e) => {
               const { value } = e.target;
               setdata({
@@ -702,19 +1041,245 @@ function CustomizedSteppers() {
     },
     {
       label: "Skills",
-      input: <>hi</>,
+      input: (
+        <>
+          <Autocomplete
+            multiple
+            id="tags-standard"
+            value={data.skills}
+            options={skillsdic}
+            getOptionLabel={(option) => option.name}
+            onChange={(event, value) => {
+              setdata({
+                ...data,
+                skills: value,
+              });
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant="standard"
+                label="Skills"
+                placeholder="Favorites"
+                value={data.skills}
+              />
+            )}
+          />
+        </>
+      ),
     },
     {
       label: "Education",
-      input: <>oki</>,
+      input: (
+        <>
+          <TextField
+            value={data.education.studyPlace}
+            id="outlined-required"
+            label="What school did you go to?"
+            variant="outlined"
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                education: {
+                  studyPlace: value,
+                  major: data.education.major,
+                  City: data.education.City,
+                  State: data.education.State,
+                  Country: data.education.Country,
+                  graduationDate: data.education.graduationDate,
+                  academicAchievements: data.education.academicAchievements,
+                },
+              });
+            }}
+          />
+          <TextField
+            value={data.education.major}
+            id="outlined-required"
+            label="What did you study?"
+            variant="outlined"
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                education: {
+                  studyPlace: data.education.studyPlace,
+                  major: value,
+                  City: data.education.City,
+                  State: data.education.State,
+                  Country: data.education.Country,
+                  graduationDate: data.education.graduationDate,
+                  academicAchievements: data.education.academicAchievements,
+                },
+              });
+            }}
+          />
+          <br />
+          <TextField
+            value={data.education.City}
+            id="outlined-required"
+            label="City"
+            variant="outlined"
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                education: {
+                  studyPlace: data.education.studyPlace,
+                  major: data.education.major,
+                  City: value,
+                  State: data.education.State,
+                  Country: data.education.Country,
+                  graduationDate: data.education.graduationDate,
+                  academicAchievements: data.education.academicAchievements,
+                },
+              });
+            }}
+          />
+          <TextField
+            value={data.education.State}
+            id="outlined-required"
+            label="State"
+            variant="outlined"
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                education: {
+                  studyPlace: data.education.studyPlace,
+                  major: data.education.major,
+                  City: data.education.City,
+                  State: value,
+                  Country: data.education.Country,
+                  graduationDate: data.education.graduationDate,
+                  academicAchievements: data.education.academicAchievements,
+                },
+              });
+            }}
+          />
+          <TextField
+            value={data.education.Country}
+            id="outlined-required"
+            label="Country"
+            variant="outlined"
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                education: {
+                  studyPlace: data.education.studyPlace,
+                  major: data.education.major,
+                  City: data.education.City,
+                  State: data.education.State,
+                  Country: value,
+                  graduationDate: data.education.graduationDate,
+                  academicAchievements: data.education.academicAchievements,
+                },
+              });
+            }}
+          />
+          <br />
+          <TextField
+            value={data.education.graduationDate}
+            id="outlined-required"
+            label="Graduation Date"
+            variant="outlined"
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                education: {
+                  studyPlace: data.education.studyPlace,
+                  major: data.education.major,
+                  City: data.education.City,
+                  State: data.education.State,
+                  Country: data.education.Country,
+                  graduationDate: value,
+                  academicAchievements: data.education.academicAchievements,
+                },
+              });
+            }}
+          />
+          <br />
+          <textarea
+            value={data.education.academicAchievements}
+            placeholder="Responsibilities and Accomplishments"
+            className="resize_input"
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                education: {
+                  studyPlace: data.education.studyPlace,
+                  major: data.education.major,
+                  City: data.education.City,
+                  State: data.education.State,
+                  Country: data.education.Country,
+                  graduationDate: data.education.graduationDate,
+                  academicAchievements: value,
+                },
+              });
+            }}
+          />
+        </>
+      ),
     },
     {
       label: "Languages",
-      input: <>nice</>,
+      input: (
+        <>
+          <Autocomplete
+            multiple
+            id="tags-standard"
+            value={data.languages}
+            options={languagesdic}
+            getOptionLabel={(option) => option.language}
+            onChange={(event, value) => {
+              setdata({
+                ...data,
+                languages: value,
+              });
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant="standard"
+                label="Languages"
+                placeholder="Favorites"
+                value={data.languages}
+              />
+            )}
+          />
+        </>
+      ),
     },
     {
       label: "Certificates",
-      input: <>no</>,
+      input: (
+        <>
+          <Autocomplete
+            value={data.certificates}
+            multiple
+            id="tags-standard"
+            options={}
+            onChange={(event, value) => {
+              setdata({
+                ...data,
+                certificates: value,
+              });
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant="standard"
+                label="Certificates"
+                placeholder="Favorites"
+                value={data.certificates}
+              />
+            )}
+          />
+        </>
+      ),
     },
     {
       label: "Awards",
