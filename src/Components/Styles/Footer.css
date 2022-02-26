@@ -1,0 +1,14 @@
+.footer {
+  height: 20vh;
+}
+
+.content_center {
+  display: flex;
+  justify-content: space-evenly;
+}
+.paddingtop20 {
+  padding-top: 20px;
+}
+.bgblack {
+  background-color: #000000;
+}
