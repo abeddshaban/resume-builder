@@ -69,7 +69,7 @@ export default function PersistentDrawerRight() {
               sx={{ flexGrow: 1 }}
               component="div"
             >
-              project
+              Project Name
             </Typography>
             <IconButton
               color="inherit"
@@ -107,14 +107,8 @@ export default function PersistentDrawerRight() {
           <Divider />
           <List>
             <Link to="/" className="link" onClick={handleDrawerClose}>
-              <ListItem button key="12 ls grade calculator">
-                <ListItemText primary="12 ls grade calculator" />
-              </ListItem>
-            </Link>
-
-            <Link to="/classes" className="link" onClick={handleDrawerClose}>
-              <ListItem button key="classes">
-                <ListItemText primary="classes" />
+              <ListItem button>
+                <ListItemText primary="Home" />
               </ListItem>
             </Link>
           </List>

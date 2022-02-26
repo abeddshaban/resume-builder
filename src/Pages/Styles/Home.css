@@ -1,3 +1,19 @@
 .home_div {
   width: 100%;
 }
+
+.home_header1 {
+  font-size: 3.125rem;
+}
+
+.home_header2 {
+  font-size: 2rem;
+  line-height: 2.375rem;
+}
+
+@media screen and (max-width: 570px) {
+  .home_header1 {
+    font-size: 2rem;
+    line-height: 2.375rem;
+  }
+}

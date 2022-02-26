@@ -8,10 +8,8 @@ import Home from "./Pages/Home";
 function App() {
   return (
     <div className="App">
-      <br />
       {/* <FormStepper /> */}
       <NavBar />
-      <Home />
 
       <Routes>
         <Route path="*" element={<PageNotFound />} />
