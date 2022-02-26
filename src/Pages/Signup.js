@@ -1,7 +1,7 @@
 import { Box, Button, Card, TextField } from "@mui/material";
-import "./Styles/Login.css";
+import "./Styles/Signup.css";
 
-const Login = () => {
+const Signup = () => {
   return (
     <div className="login_div contentcenter padtop20">
       <Box
@@ -41,4 +41,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

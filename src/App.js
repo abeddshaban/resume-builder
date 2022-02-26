@@ -6,6 +6,7 @@ import Home from "./Pages/Home";
 import Footer from "./Components/Footer";
 import Terms from "./Pages/Terms";
 import Login from "./Pages/Login";
+import Signup from "./Pages/Signup";
 // import FormStepper from "./Components/FormStepper";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
 
         <Route exact path="/" element={<Home />} />
         <Route exact path="/login" element={<Login />} />
+        <Route exact path="/signup" element={<Signup />} />
 
         <Route exact path="/Terms-Privacy" element={<Terms />} />
       </Routes>

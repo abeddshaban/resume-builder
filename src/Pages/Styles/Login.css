@@ -2,3 +2,26 @@
   width: 100%;
   height: 90vh;
 }
+
+.contentcenter {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.contentcentercolumn {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.padtop20 {
+  padding-top: 20px;
+}
+
+.logincenter {
+  text-align: center;
+}
+
+.margintop20 {
+  margin-top: 45px;
+}
