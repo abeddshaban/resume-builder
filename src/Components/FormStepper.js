@@ -539,8 +539,8 @@ function CustomizedSteppers() {
     },
     skills: [],
     languages: [],
-    certificates: [],
-    awards: [],
+    certificates: "",
+    awards: "",
   });
   console.log(data);
   const forms = [
@@ -1257,33 +1257,43 @@ function CustomizedSteppers() {
       label: "Certificates",
       input: (
         <>
-          <Autocomplete
+          <TextField
             value={data.certificates}
-            multiple
-            id="tags-standard"
-            options={}
-            onChange={(event, value) => {
+            id="outlined-required"
+            label="Certificates"
+            variant="outlined"
+            onChange={(e) => {
+              const { value } = e.target;
               setdata({
                 ...data,
                 certificates: value,
               });
             }}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                variant="standard"
-                label="Certificates"
-                placeholder="Favorites"
-                value={data.certificates}
-              />
-            )}
           />
+          <p className="small_grey_text">separate each certificate with a /</p>
         </>
       ),
     },
     {
       label: "Awards",
-      input: <>none</>,
+      input: (
+        <>
+          <TextField
+            value={data.awards}
+            id="outlined-required"
+            label="Awards"
+            variant="outlined"
+            onChange={(e) => {
+              const { value } = e.target;
+              setdata({
+                ...data,
+                awards: value,
+              });
+            }}
+          />
+          <p className="small_grey_text">separate each Award with a /</p>
+        </>
+      ),
     },
   ];
   return (

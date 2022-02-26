@@ -20,3 +20,9 @@
   resize: both;
   overflow: auto;
 }
+
+.small_grey_text {
+  color: #6e6e6e;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+}

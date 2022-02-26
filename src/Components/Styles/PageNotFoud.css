@@ -1,0 +1,16 @@
+.pagenotfound_div {
+  width: 100%;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pagenotfound_section {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  font-size: x-large;
+}
+.pagenotfound_section > p {
+  font-size: medium;
+}

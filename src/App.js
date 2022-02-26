@@ -1,19 +1,22 @@
 import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import NavBar from "./Components/NavBar";
+import PageNotFound from "./Components/PageNotFound";
 import Home from "./Pages/Home";
-import FormStepper from "./Components/FormStepper";
-import { Routes } from "react-router-dom";
+// import FormStepper from "./Components/FormStepper";
 
 function App() {
   return (
     <div className="App">
       <br />
-      <FormStepper />
+      {/* <FormStepper /> */}
+      <NavBar />
       <Home />
 
       <Routes>
-        {/* <Route path="*" element={<PageNotFound />} /> */}
+        <Route path="*" element={<PageNotFound />} />
 
-        {/* <Route exact path="/12-ls/History" element={<TwelveLsHistory />} /> */}
+        <Route exact path="/" element={<Home />} />
       </Routes>
     </div>
   );
