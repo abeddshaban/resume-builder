@@ -1,7 +1,7 @@
 import "./Styles/Home.css";
 import React from "react";
 import { Button } from "@mui/material";
-// import PDF from "../Components/PDF";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -15,7 +15,9 @@ const Home = () => {
           Create your resume easily with our professional builder.
         </p>
         <div className="margin">
-          <Button variant="contained">Go To Dashboard</Button>
+          <Link to="/dashbordredirect" className="link">
+            <Button variant="contained">Go To Dashboard</Button>
+          </Link>
         </div>
       </section>
 
@@ -32,18 +34,19 @@ const Home = () => {
           Start building your resume today, land your dream job tomorrow
         </h2>
         <div className="center">
-          <Button
-            style={{
-              backgroundColor: "#ffffff",
-              color: "#440ccd",
-            }}
-            variant="contained"
-          >
-            Go To Dashboard
-          </Button>
+          <Link to="/dashbordredirect" className="link">
+            <Button
+              style={{
+                backgroundColor: "#ffffff",
+                color: "#440ccd",
+              }}
+              variant="contained"
+            >
+              Go To Dashboard
+            </Button>
+          </Link>
         </div>
       </section>
-      {/* <PDF data={data} /> */}
     </div>
   );
 };

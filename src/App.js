@@ -9,6 +9,7 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import FormStepper from "./Components/FormStepper";
 import PDFresume from "./Components/PDFresume";
+import DashbordRedirect from "./Components/DashbordRedirect";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<Signup />} />
+        <Route exact path="/dashbordredirect" element={<DashbordRedirect />} />
 
         <Route exact path="/Terms-Privacy" element={<Terms />} />
 
