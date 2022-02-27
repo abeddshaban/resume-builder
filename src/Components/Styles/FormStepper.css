@@ -1,13 +1,16 @@
 .form_stepper {
   width: 100%;
-  height: 100vh;
+  height: auto;
+  margin-bottom: 20px;
 }
 
 .form_footer {
   width: 100%;
+  max-width: 340px;
   display: flex;
   justify-content: space-evenly;
-  margin-top: 10vh;
+  margin: auto;
+  margin-top: 20px;
 }
 
 .center_text {

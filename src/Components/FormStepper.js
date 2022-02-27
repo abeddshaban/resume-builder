@@ -11,11 +11,12 @@ import SchoolIcon from "@mui/icons-material/School";
 import LanguageIcon from "@mui/icons-material/Language";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import CardMembershipIcon from "@mui/icons-material/CardMembership";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, Card, TextareaAutosize, TextField } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
-import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
+import Autocomplete from "@mui/material/Autocomplete";
 
 import "./Styles/FormStepper.css";
+import { Link } from "react-router-dom";
 
 const QontoStepIconRoot = styled("div")(({ theme, ownerState }) => ({
   color: theme.palette.mode === "dark" ? theme.palette.grey[700] : "#eaeaf0",
@@ -501,13 +502,8 @@ function CustomizedSteppers() {
       email: "example@gmail.com",
       phonenumber: "ex: 563278723",
       JobCategory: "Job Category",
-      selfDescription: `A summation of relevant professional abilities, 
-      accomplishments, and personal qualities that make you the right
-       candidate for the job. Be sure to give your potential employer 
-       a relevant snapshot of who you are and what you can offer. Tailor
-        it to the position you're applying for, focusing on the most releva
-        nt qualifications for the job.
-        `,
+      selfDescription:
+        " A summation of relevant professional abilities, accomplishments, and personal qualities that make you the right candidate for the job. Be sure to give your potential employer a relevant snapshot of who you are and what you can offer. Tailor it to the position you are applying for, focusing on the most relevant qualifications for the job.",
     },
     contactInformation: {
       StreetAddress: "street address",
@@ -549,11 +545,10 @@ function CustomizedSteppers() {
       input: (
         <>
           <TextField
+            value={data.profile.firstname}
             required
-            id="outlined-required"
             label="First Name"
             variant="outlined"
-            value={data.profile.firstname}
             onChange={(e) => {
               const { value } = e.target;
               setdata({
@@ -570,11 +565,10 @@ function CustomizedSteppers() {
             }}
           />
           <TextField
+            value={data.profile.lastname}
             required
-            id="outlined-required"
             label="Second Name"
             variant="outlined"
-            value={data.profile.lastname}
             onChange={(e) => {
               const { value } = e.target;
               setdata({
@@ -591,11 +585,10 @@ function CustomizedSteppers() {
             }}
           />
           <TextField
+            value={data.profile.email}
             required
-            id="outlined-required"
             label="Email"
             variant="outlined"
-            value={data.profile.email}
             onChange={(e) => {
               const { value } = e.target;
               setdata({
@@ -612,11 +605,10 @@ function CustomizedSteppers() {
             }}
           />
           <TextField
+            value={data.profile.phonenumber}
             required
-            id="outlined-required"
             label="Phone Number"
             variant="outlined"
-            value={data.profile.phonenumber}
             onChange={(e) => {
               const { value } = e.target;
               setdata({
@@ -633,11 +625,10 @@ function CustomizedSteppers() {
             }}
           />
           <TextField
+            value={data.profile.JobCategory}
             required
-            id="outlined-required"
             label="Job Category"
             variant="outlined"
-            value={data.profile.JobCategory}
             onChange={(e) => {
               const { value } = e.target;
               setdata({
@@ -653,11 +644,8 @@ function CustomizedSteppers() {
               });
             }}
           />
-          <TextField
-            required
-            id="outlined-required"
-            label="Description"
-            variant="outlined"
+
+          <TextareaAutosize
             value={data.profile.selfDescription}
             onChange={(e) => {
               const { value } = e.target;
@@ -673,6 +661,14 @@ function CustomizedSteppers() {
                 },
               });
             }}
+            minRows={3}
+            placeholder="Description"
+            style={{
+              minHeight: 50,
+              maxWidth: 210,
+              minWidth: 210,
+              width: 210,
+            }}
           />
         </>
       ),
@@ -682,10 +678,9 @@ function CustomizedSteppers() {
       input: (
         <>
           <TextField
-            id="outlined-required"
+            value={data.contactInformation.StreetAddress}
             label="Street Address"
             variant="outlined"
-            value={data.contactInformation.StreetAddress}
             onChange={(e) => {
               const { value } = e.target;
               setdata({
@@ -700,10 +695,9 @@ function CustomizedSteppers() {
             }}
           />
           <TextField
-            id="outlined-required"
+            value={data.contactInformation.City}
             label="City"
             variant="outlined"
-            value={data.contactInformation.City}
             onChange={(e) => {
               const { value } = e.target;
               setdata({
@@ -718,10 +712,9 @@ function CustomizedSteppers() {
             }}
           />
           <TextField
-            id="outlined-required"
+            value={data.contactInformation.State}
             label="State"
             variant="outlined"
-            value={data.contactInformation.State}
             onChange={(e) => {
               const { value } = e.target;
               setdata({
@@ -736,10 +729,9 @@ function CustomizedSteppers() {
             }}
           />
           <TextField
-            id="outlined-required"
+            value={data.contactInformation.Country}
             label="Country"
             variant="outlined"
-            value={data.contactInformation.Country}
             onChange={(e) => {
               const { value } = e.target;
               setdata({
@@ -762,7 +754,6 @@ function CustomizedSteppers() {
         <>
           <TextField
             value={data.experience.company}
-            id="outlined-required"
             label="Company, organization, volunteer "
             variant="outlined"
             onChange={(e) => {
@@ -789,7 +780,6 @@ function CustomizedSteppers() {
           />
           <TextField
             value={data.experience.role}
-            id="outlined-required"
             label="Role or job title"
             variant="outlined"
             onChange={(e) => {
@@ -814,10 +804,8 @@ function CustomizedSteppers() {
               });
             }}
           />
-          <br />
           <TextField
             value={data.experience.StartDate}
-            id="outlined-required"
             label="Start Date"
             variant="outlined"
             onChange={(e) => {
@@ -845,7 +833,6 @@ function CustomizedSteppers() {
           {checked === true ? (
             <TextField
               value={data.experience.EndDate}
-              id="outlined-required"
               label="End Date"
               variant="outlined"
               onChange={(e) => {
@@ -874,7 +861,6 @@ function CustomizedSteppers() {
             <TextField
               value={data.experience.EndDate}
               disabled
-              id="outlined-required"
               label="End Date"
               variant="filled"
               onChange={(e) => {
@@ -900,38 +886,35 @@ function CustomizedSteppers() {
               }}
             />
           )}
-
-          <br />
-          <Checkbox
-            checked={data.experience.currentstate.currentlylyEmployed}
-            {...label}
-            onChange={() => {
-              setdata({
-                ...data,
-                experience: {
-                  company: data.experience.company,
-                  role: data.experience.role,
-                  StartDate: data.experience.StartDate,
-                  EndDate: data.experience.EndDate,
-                  responsibilitiesAccomplishments:
-                    data.experience.responsibilitiesAccomplishments,
-                  currentstate: {
-                    currentlylyEmployed: checked,
-                    City: data.experience.currentstate.City,
-                    State: data.experience.currentstate.State,
-                    Country: data.experience.currentstate.Country,
+          <div>
+            <Checkbox
+              checked={data.experience.currentstate.currentlylyEmployed}
+              {...label}
+              onChange={() => {
+                setdata({
+                  ...data,
+                  experience: {
+                    company: data.experience.company,
+                    role: data.experience.role,
+                    StartDate: data.experience.StartDate,
+                    EndDate: data.experience.EndDate,
+                    responsibilitiesAccomplishments:
+                      data.experience.responsibilitiesAccomplishments,
+                    currentstate: {
+                      currentlylyEmployed: checked,
+                      City: data.experience.currentstate.City,
+                      State: data.experience.currentstate.State,
+                      Country: data.experience.currentstate.Country,
+                    },
                   },
-                },
-              });
-              toggleChecked();
-            }}
-          />
-          <span>currentlyly employed</span>
-
-          <br />
+                });
+                toggleChecked();
+              }}
+            />
+            <span>currentlyly employed</span>
+          </div>
           <TextField
             value={data.experience.currentstate.City}
-            id="outlined-required"
             label="City"
             variant="outlined"
             onChange={(e) => {
@@ -958,7 +941,6 @@ function CustomizedSteppers() {
           />
           <TextField
             value={data.experience.currentstate.State}
-            id="outlined-required"
             label="State"
             variant="outlined"
             onChange={(e) => {
@@ -985,7 +967,6 @@ function CustomizedSteppers() {
           />
           <TextField
             value={data.experience.currentstate.Country}
-            id="outlined-required"
             label="Country"
             variant="outlined"
             onChange={(e) => {
@@ -1010,11 +991,9 @@ function CustomizedSteppers() {
               });
             }}
           />
-          <br />
-          <textarea
+
+          <TextareaAutosize
             value={data.experience.responsibilitiesAccomplishments}
-            placeholder="Responsibilities and Accomplishments"
-            className="resize_input"
             onChange={(e) => {
               const { value } = e.target;
               setdata({
@@ -1035,6 +1014,9 @@ function CustomizedSteppers() {
                 },
               });
             }}
+            minRows={3}
+            placeholder="Responsibilities and Accomplishments"
+            style={{ maxWidth: 210, minWidth: 210, width: 210 }}
           />
         </>
       ),
@@ -1044,9 +1026,8 @@ function CustomizedSteppers() {
       input: (
         <>
           <Autocomplete
-            multiple
-            id="tags-standard"
             value={data.skills}
+            multiple
             options={skillsdic}
             getOptionLabel={(option) => option.name}
             onChange={(event, value) => {
@@ -1074,7 +1055,6 @@ function CustomizedSteppers() {
         <>
           <TextField
             value={data.education.studyPlace}
-            id="outlined-required"
             label="What school did you go to?"
             variant="outlined"
             onChange={(e) => {
@@ -1095,7 +1075,6 @@ function CustomizedSteppers() {
           />
           <TextField
             value={data.education.major}
-            id="outlined-required"
             label="What did you study?"
             variant="outlined"
             onChange={(e) => {
@@ -1114,10 +1093,8 @@ function CustomizedSteppers() {
               });
             }}
           />
-          <br />
           <TextField
             value={data.education.City}
-            id="outlined-required"
             label="City"
             variant="outlined"
             onChange={(e) => {
@@ -1138,7 +1115,6 @@ function CustomizedSteppers() {
           />
           <TextField
             value={data.education.State}
-            id="outlined-required"
             label="State"
             variant="outlined"
             onChange={(e) => {
@@ -1159,7 +1135,6 @@ function CustomizedSteppers() {
           />
           <TextField
             value={data.education.Country}
-            id="outlined-required"
             label="Country"
             variant="outlined"
             onChange={(e) => {
@@ -1178,10 +1153,8 @@ function CustomizedSteppers() {
               });
             }}
           />
-          <br />
           <TextField
             value={data.education.graduationDate}
-            id="outlined-required"
             label="Graduation Date"
             variant="outlined"
             onChange={(e) => {
@@ -1200,11 +1173,9 @@ function CustomizedSteppers() {
               });
             }}
           />
-          <br />
-          <textarea
+
+          <TextareaAutosize
             value={data.education.academicAchievements}
-            placeholder="Responsibilities and Accomplishments"
-            className="resize_input"
             onChange={(e) => {
               const { value } = e.target;
               setdata({
@@ -1220,6 +1191,9 @@ function CustomizedSteppers() {
                 },
               });
             }}
+            minRows={3}
+            placeholder="Academic Achievements"
+            style={{ maxWidth: 210, minWidth: 210, width: 210 }}
           />
         </>
       ),
@@ -1229,9 +1203,8 @@ function CustomizedSteppers() {
       input: (
         <>
           <Autocomplete
-            multiple
-            id="tags-standard"
             value={data.languages}
+            multiple
             options={languagesdic}
             getOptionLabel={(option) => option.language}
             onChange={(event, value) => {
@@ -1259,7 +1232,6 @@ function CustomizedSteppers() {
         <>
           <TextField
             value={data.certificates}
-            id="outlined-required"
             label="Certificates"
             variant="outlined"
             onChange={(e) => {
@@ -1280,7 +1252,6 @@ function CustomizedSteppers() {
         <>
           <TextField
             value={data.awards}
-            id="outlined-required"
             label="Awards"
             variant="outlined"
             onChange={(e) => {
@@ -1297,28 +1268,52 @@ function CustomizedSteppers() {
     },
   ];
   return (
-    <div className="form_stepper">
+    <div className="form_stepper ">
+      <br />
+      <br />
+      <br />
       <Box
-        className="center_text"
-        component="form"
         sx={{
           "& .MuiTextField-root": { m: 1, width: "25ch" },
         }}
+        className="center_text"
+        component="form"
         noValidate
         autoComplete="off"
       >
-        <div>{forms[activeStep].label}</div>
-        <div>{forms[activeStep].input}</div>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            flexWrap: "wrap",
+            paddingLeft: "10px",
+            "& > :not(style)": {
+              m: 1,
+              width: 340,
+            },
+          }}
+        >
+          <Card
+            sx={{
+              paddingTop: "40px",
+              paddingBottom: "40px",
+            }}
+            variant="outlined"
+          >
+            <h2>{forms[activeStep].label}</h2>
+            <div>{forms[activeStep].input}</div>
+          </Card>
+        </Box>
       </Box>
 
       <footer className="form_footer">
+        {/* back btn */}
         {activeStep === 0 ? (
-          <Button className="nav_btn" variant="outlined" size="medium" disabled>
+          <Button variant="outlined" size="medium" disabled>
             Back
           </Button>
         ) : (
           <Button
-            className="nav_btn"
             variant="contained"
             size="medium"
             onClick={() => {
@@ -1329,13 +1324,15 @@ function CustomizedSteppers() {
           </Button>
         )}
 
+        {/* next / create btn */}
         {activeStep === 7 ? (
-          <Button className="nav_btn" variant="outlined" size="medium" disabled>
-            Next
-          </Button>
+          <Link to={{ pathname: "/resume", data: data }} className="link">
+            <Button variant="contained" size="medium">
+              create
+            </Button>
+          </Link>
         ) : (
           <Button
-            className="nav_btn"
             variant="contained"
             size="medium"
             onClick={() => {

@@ -25,11 +25,12 @@ const PDF = ({ data }) => {
 
   return (
     <div>
+      {this.props.children}
+
       <div id="pdf-view">
         <br />
-        {/* <br /> */}
         <section className="border_section" />
-
+        <h2>hello</h2>
         <section className="resume">
           <div className="resume_header">
             <div className="header_div">

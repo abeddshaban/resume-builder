@@ -7,12 +7,12 @@ import Footer from "./Components/Footer";
 import Terms from "./Pages/Terms";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
-// import FormStepper from "./Components/FormStepper";
+import FormStepper from "./Components/FormStepper";
+import PDFresume from "./Components/PDFresume";
 
 function App() {
   return (
     <div className="App">
-      {/* <FormStepper /> */}
       <NavBar />
 
       <Routes>
@@ -23,6 +23,9 @@ function App() {
         <Route exact path="/signup" element={<Signup />} />
 
         <Route exact path="/Terms-Privacy" element={<Terms />} />
+
+        <Route exact path="/resume-builder" element={<FormStepper />} />
+        <Route exact path="/resume" element={<PDFresume />} />
       </Routes>
       <Footer />
     </div>

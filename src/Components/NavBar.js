@@ -111,6 +111,15 @@ export default function PersistentDrawerRight() {
                 <ListItemText primary="Home" />
               </ListItem>
             </Link>
+            <Link
+              to="/resume-builder"
+              className="link"
+              onClick={handleDrawerClose}
+            >
+              <ListItem button>
+                <ListItemText primary="Resume builder" />
+              </ListItem>
+            </Link>
           </List>
           <Divider />
         </Drawer>
