@@ -538,6 +538,12 @@ function CustomizedSteppers() {
     certificates: "",
     awards: "",
   });
+
+  const CreateResume = (e) => {
+    e.preventDefault();
+    console.log("create cv");
+  };
+
   console.log(data);
   const forms = [
     {
@@ -1326,8 +1332,8 @@ function CustomizedSteppers() {
 
         {/* next / create btn */}
         {activeStep === 7 ? (
-          <Link to={{ pathname: "/resume", data: data }} className="link">
-            <Button variant="contained" size="medium">
+          <Link to={{ pathname: "/resume" }} className="link">
+            <Button onClick={CreateResume} variant="contained" size="medium">
               create
             </Button>
           </Link>

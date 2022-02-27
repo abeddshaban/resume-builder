@@ -25,8 +25,6 @@ const PDF = ({ data }) => {
 
   return (
     <div>
-      {this.props.children}
-
       <div id="pdf-view">
         <br />
         <section className="border_section" />
