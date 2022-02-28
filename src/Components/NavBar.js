@@ -69,7 +69,7 @@ export default function PersistentDrawerRight() {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user) {
+      if (userState) {
         // user is  logged in
         dispatch(
           login({
@@ -78,26 +78,26 @@ export default function PersistentDrawerRight() {
             displayName: user.displayName,
           })
         );
-
-        const uid = user.uid;
+        // const uid = user.uid;
       } else {
         // User is signed out
         dispatch(logout());
+        console.log("logout");
       }
     });
   }, [dispatch]);
 
   const logoutOfApp = () => {
     dispatch(logout());
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        console.log("Sign-out successful.");
-      })
-      .catch((error) => {
-        // An error happened.
-        console.log(error);
-      });
+    // signOut(auth)
+    //   .then(() => {
+    //     // Sign-out successful.
+    //     console.log("Sign-out successful.");
+    //   })
+    //   .catch((error) => {
+    //     // An error happened.
+    //     console.log(error);
+    //   });
   };
 
   return (
