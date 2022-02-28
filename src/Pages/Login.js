@@ -1,8 +1,41 @@
+import "./Styles/Login.css";
 import { Box, Button, Card, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
-import "./Styles/Login.css";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../Redux/userSlice";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+  const auth = getAuth();
+
+  const Login = (e) => {
+    e.preventDefault();
+
+    signInWithEmailAndPassword(auth, Email, Password)
+      .then((userCredential) => {
+        // Sign-in
+        const user = userCredential.user;
+        dispatch(
+          login({
+            email: user.email,
+            uid: user.uid,
+            displayName: user.displayName,
+          })
+        );
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        //..
+        console.log(errorCode);
+        console.log(errorMessage);
+      });
+  };
   return (
     <div className="login_div contentcenter padtop20">
       <Box
@@ -22,21 +55,27 @@ const Login = () => {
           <h2 className="logincenter">Login</h2>
           <div className="contentcentercolumn">
             <TextField
-              sx={{ margin: "20px" }}
+              value={Email}
+              onChange={(e) => setEmail(e.target.value)}
               label="Email"
               variant="standard"
+              sx={{ margin: "20px" }}
             />
             <TextField
-              sx={{ margin: "20px" }}
+              value={Password}
+              onChange={(e) => setPassword(e.target.value)}
               label="Password"
               variant="standard"
+              sx={{ margin: "20px" }}
             />
           </div>
           <div className="contentcenter margintop20">
             <Link to="/" className="link">
               <Button variant="outlined">cancel</Button>
             </Link>
-            <Button variant="outlined">login</Button>
+            <Button onClick={Login} variant="outlined">
+              login
+            </Button>
           </div>
         </Card>
       </Box>

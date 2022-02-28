@@ -1,7 +1,14 @@
+import "./Styles/Signup.css";
 import { Box, Button, Card, TextField } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Styles/Signup.css";
+import { useDispatch } from "react-redux";
+import { login } from "../Redux/userSlice";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 
 const Signup = () => {
   const [FirstName, setFirstName] = useState("");
@@ -9,6 +16,42 @@ const Signup = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [repeatPassword, setrepeatPassword] = useState("");
+
+  const dispatch = useDispatch();
+  const auth = getAuth();
+
+  const Register = (e) => {
+    e.preventDefault();
+
+    createUserWithEmailAndPassword(auth, Email, Password)
+      .then((userCredential) => {
+        // Sign-up
+        const user = userCredential.user;
+
+        updateProfile(auth.currentUser, {
+          displayName: FirstName + " " + LastName,
+        }).then(() => {
+          console.log("profile status updated");
+
+          dispatch(
+            login({
+              email: user.email,
+              uid: user.uid,
+              displayName: user.displayName,
+            })
+          );
+        });
+
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+        console.log(errorCode);
+        console.log(errorMessage);
+      });
+  };
 
   return (
     <div className="signup_div contentcenter padtop20">
@@ -70,10 +113,7 @@ const Signup = () => {
               <Button variant="outlined">cancel</Button>
             </Link>
 
-            <Button
-              // onClick={}
-              variant="outlined"
-            >
+            <Button onClick={Register} variant="outlined">
               signup
             </Button>
           </div>

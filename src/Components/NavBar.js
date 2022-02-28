@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -13,8 +13,13 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "./Styles/NavBar.css";
+//
+import { useDispatch, useSelector } from "react-redux";
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+
+import { login, logout, selectUser } from "../Redux/userSlice";
 
 const drawerWidth = 240;
 
@@ -54,6 +59,45 @@ export default function PersistentDrawerRight() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const userState = useSelector(selectUser);
+
+  const dispatch = useDispatch();
+
+  const auth = getAuth();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // user is  logged in
+        dispatch(
+          login({
+            email: user.email,
+            uid: user.uid,
+            displayName: user.displayName,
+          })
+        );
+
+        const uid = user.uid;
+      } else {
+        // User is signed out
+        dispatch(logout());
+      }
+    });
+  }, [dispatch]);
+
+  const logoutOfApp = () => {
+    dispatch(logout());
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        console.log("Sign-out successful.");
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error);
+      });
   };
 
   return (
@@ -111,6 +155,7 @@ export default function PersistentDrawerRight() {
                 <ListItemText primary="Home" />
               </ListItem>
             </Link>
+
             <Link
               to="/resume-builder"
               className="link"
@@ -120,6 +165,18 @@ export default function PersistentDrawerRight() {
                 <ListItemText primary="Resume builder" />
               </ListItem>
             </Link>
+
+            {/* login / logout */}
+            <ListItem button>
+              {!userState ? (
+                <ListItemText onClick={logoutOfApp} primary="logout" />
+              ) : (
+                <ListItemText
+                  onClick={<Navigate to="/login" />}
+                  primary="login"
+                />
+              )}
+            </ListItem>
           </List>
           <Divider />
         </Drawer>

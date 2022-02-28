@@ -2,17 +2,19 @@ import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout, selectUser } from "../Redux/userSlice";
-import auth from "../Firebase/firebase";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const DashbordRedirect = () => {
   const user = useSelector(selectUser);
 
   const dispatch = useDispatch();
 
+  const auth = getAuth();
+
   useEffect(() => {
-    auth.onAuthStateChanged((userAuth) => {
+    onAuthStateChanged(auth, (userAuth) => {
       if (userAuth) {
-        // user is  logged in
+        // user is logged in
         dispatch(
           login({
             email: userAuth.email,
@@ -21,7 +23,7 @@ const DashbordRedirect = () => {
           })
         );
       } else {
-        // user is  logged out
+        // user is logged out
         dispatch(logout());
       }
     });
