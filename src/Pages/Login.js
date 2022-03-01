@@ -38,7 +38,7 @@ const Login = () => {
       });
 
     // push history to dashboard
-    navigate("/dashbordredirect");
+    navigate("/");
   };
   return (
     <div className="login_div contentcenter padtop20">
@@ -73,6 +73,14 @@ const Login = () => {
               sx={{ margin: "20px" }}
             />
           </div>
+
+          <span className="padtop20 padLeft20 bold">
+            Don't have an account?
+            <Link to="/signup" className="link bold blue underlined">
+              Signup now!
+            </Link>
+          </span>
+
           <div className="contentcenter margintop20">
             <Link to="/" className="link">
               <Button variant="outlined">cancel</Button>

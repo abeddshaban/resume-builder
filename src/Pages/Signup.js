@@ -51,7 +51,7 @@ const Signup = () => {
       });
 
     // push history and go to dashboard
-    navigate("/dashbordredirect");
+    navigate("/");
   };
 
   return (
@@ -109,6 +109,14 @@ const Signup = () => {
               variant="standard"
             />
           </div>
+
+          <span className="padtop20 padLeft20 bold">
+            Have an account?
+            <Link to="/login" className="link bold blue underlined">
+              Login now!
+            </Link>
+          </span>
+
           <div className="contentcenter margintop20">
             <Link to="/" className="link">
               <Button variant="outlined">cancel</Button>

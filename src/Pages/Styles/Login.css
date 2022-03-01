@@ -18,10 +18,29 @@
   padding-top: 20px;
 }
 
+.padLeft20 {
+  padding-left: 20px;
+}
+
 .logincenter {
   text-align: center;
 }
 
 .margintop20 {
   margin-top: 45px;
+}
+.bold {
+  font-weight: 500;
+}
+
+.blue {
+  color: blue;
+}
+
+.underlined {
+  text-decoration: underline;
+}
+
+.underlined:hover {
+  text-decoration: none;
 }
