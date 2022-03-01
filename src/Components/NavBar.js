@@ -101,6 +101,7 @@ export default function PersistentDrawerRight() {
         // An error happened.
         console.log(error);
       });
+    handleDrawerClose();
     navigate("/");
   };
 
@@ -181,10 +182,7 @@ export default function PersistentDrawerRight() {
               </Link>
             ) : (
               <ListItem sx={{ color: "#ff0000" }} button>
-                <ListItemText
-                  onClick={(logoutOfApp, handleDrawerClose)}
-                  primary="logout"
-                />
+                <ListItemText onClick={logoutOfApp} primary="logout" />
               </ListItem>
             )}
           </List>
