@@ -1,17 +1,18 @@
 import "./Styles/Login.css";
 import { Box, Button, Card, TextField } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../Redux/userSlice";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../Firebase/firebase";
 
 const Login = () => {
+  let navigate = useNavigate();
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
 
   const dispatch = useDispatch();
-  const auth = getAuth();
 
   const Login = (e) => {
     e.preventDefault();
@@ -35,6 +36,9 @@ const Login = () => {
         console.log(errorCode);
         console.log(errorMessage);
       });
+
+    // push history to dashboard
+    navigate("/dashbordredirect");
   };
   return (
     <div className="login_div contentcenter padtop20">

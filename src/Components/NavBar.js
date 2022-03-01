@@ -1,3 +1,4 @@
+import "./Styles/NavBar.css";
 import React, { useEffect } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -12,14 +13,15 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import { Link, Navigate } from "react-router-dom";
-import "./Styles/NavBar.css";
+import { Link, useNavigate } from "react-router-dom";
+
 //
+import ListItemText from "@mui/material/ListItemText";
 import { useDispatch, useSelector } from "react-redux";
-import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 
 import { login, logout, selectUser } from "../Redux/userSlice";
+import { auth } from "../Firebase/firebase";
 
 const drawerWidth = 240;
 
@@ -61,11 +63,11 @@ export default function PersistentDrawerRight() {
     setOpen(false);
   };
 
+  let navigate = useNavigate();
+
   const userState = useSelector(selectUser);
 
   const dispatch = useDispatch();
-
-  const auth = getAuth();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -79,25 +81,27 @@ export default function PersistentDrawerRight() {
           })
         );
         // const uid = user.uid;
+        console.log("loged-in");
       } else {
         // User is signed out
         dispatch(logout());
-        console.log("logout");
+        console.log("loged-out");
       }
     });
   }, [dispatch]);
 
   const logoutOfApp = () => {
     dispatch(logout());
-    // signOut(auth)
-    //   .then(() => {
-    //     // Sign-out successful.
-    //     console.log("Sign-out successful.");
-    //   })
-    //   .catch((error) => {
-    //     // An error happened.
-    //     console.log(error);
-    //   });
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        console.log("Sign-out successful.");
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error);
+      });
+    navigate("/");
   };
 
   return (
@@ -150,12 +154,14 @@ export default function PersistentDrawerRight() {
           </DrawerHeader>
           <Divider />
           <List>
+            {/* home */}
             <Link to="/" className="link" onClick={handleDrawerClose}>
               <ListItem button>
                 <ListItemText primary="Home" />
               </ListItem>
             </Link>
 
+            {/* resume-builder */}
             <Link
               to="/resume-builder"
               className="link"
@@ -167,16 +173,20 @@ export default function PersistentDrawerRight() {
             </Link>
 
             {/* login / logout */}
-            <ListItem button>
-              {!userState ? (
-                <ListItemText onClick={logoutOfApp} primary="logout" />
-              ) : (
+            {!userState ? (
+              <Link to="/login" className="link" onClick={handleDrawerClose}>
+                <ListItem button>
+                  <ListItemText primary="login" />
+                </ListItem>
+              </Link>
+            ) : (
+              <ListItem sx={{ color: "#ff0000" }} button>
                 <ListItemText
-                  onClick={<Navigate to="/login" />}
-                  primary="login"
+                  onClick={(logoutOfApp, handleDrawerClose)}
+                  primary="logout"
                 />
-              )}
-            </ListItem>
+              </ListItem>
+            )}
           </List>
           <Divider />
         </Drawer>

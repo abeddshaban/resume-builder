@@ -3,13 +3,12 @@ import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout, selectUser } from "../Redux/userSlice";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { auth } from "../Firebase/firebase";
 
 const DashbordRedirect = () => {
   const user = useSelector(selectUser);
 
   const dispatch = useDispatch();
-
-  const auth = getAuth();
 
   useEffect(() => {
     onAuthStateChanged(auth, (userAuth) => {
@@ -32,8 +31,8 @@ const DashbordRedirect = () => {
     <>
       {!user ? (
         <>
-          {/* <h2>hi</h2> */}
-          <Navigate to="/signup" />
+          <h2>user out</h2>
+          {/* <Navigate to="/signup" /> */}
         </>
       ) : (
         <div>

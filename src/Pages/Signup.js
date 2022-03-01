@@ -1,14 +1,11 @@
 import "./Styles/Signup.css";
 import { Box, Button, Card, TextField } from "@mui/material";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../Redux/userSlice";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../Firebase/firebase";
 
 const Signup = () => {
   const [FirstName, setFirstName] = useState("");
@@ -17,8 +14,9 @@ const Signup = () => {
   const [Password, setPassword] = useState("");
   const [repeatPassword, setrepeatPassword] = useState("");
 
+  let navigate = useNavigate();
+
   const dispatch = useDispatch();
-  const auth = getAuth();
 
   const Register = (e) => {
     e.preventDefault();
@@ -51,6 +49,9 @@ const Signup = () => {
         console.log(errorCode);
         console.log(errorMessage);
       });
+
+    // push history and go to dashboard
+    navigate("/dashbordredirect");
   };
 
   return (
