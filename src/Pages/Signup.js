@@ -21,6 +21,25 @@ const Signup = () => {
 
   const Register = (e) => {
     e.preventDefault();
+    if (!FirstName) {
+      return alert("Please enter your first name.");
+    }
+    if (!LastName) {
+      return alert("Please enter your last name.");
+    }
+    if (!Email) {
+      return alert("Please enter your email.");
+    }
+    if (!Password) {
+      return alert("Please enter your password");
+    }
+    if (!repeatPassword) {
+      return alert("Please enter your password again.");
+    }
+
+    if (Password !== repeatPassword) {
+      return alert("your password is not identical.");
+    }
 
     createUserWithEmailAndPassword(auth, Email, Password)
       .then((userCredential) => {
@@ -30,7 +49,7 @@ const Signup = () => {
         updateProfile(auth.currentUser, {
           displayName: FirstName + " " + LastName,
         }).then(() => {
-          console.log("profile status updated");
+          console.log("profile created");
 
           // redux login
           dispatch(
@@ -40,27 +59,40 @@ const Signup = () => {
               displayName: user.displayName,
             })
           );
-        });
-        // add user to users collection
-        const userCollection = doc(db, "users", Email);
-        // await
-        setDoc(userCollection, {
-          FirstName: FirstName,
-          LastName: LastName,
-          email: Email,
-          resumes: [],
+          console.log("added to firebase");
+          // add user to users collection
+          const userCollection = doc(db, "users", Email);
+
+          // await
+          setDoc(userCollection, {
+            FirstName: FirstName,
+            LastName: LastName,
+            email: Email,
+            resumes: [],
+          });
         });
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         // ..
+        if (error) {
+          if (errorCode === "auth/email-already-in-use") {
+            return alert("Email already exists");
+          }
+
+          if (errorCode === "auth/weak-password") {
+            return alert(
+              "Weak password. Password should be at least 6 characters"
+            );
+          }
+        }
+
         console.log(errorCode);
         console.log(errorMessage);
       });
-
     // push history and go to dashboard
-    navigate("/");
+    navigate("/dashbordredirect");
   };
 
   return (
@@ -121,7 +153,7 @@ const Signup = () => {
 
           <span className="padtop20 padLeft20 bold">
             Have an account?
-            <Link to="/login" className="link bold blue underlined">
+            <Link to="/login" className="link bold blue underlined padleft4">
               Login now!
             </Link>
           </span>

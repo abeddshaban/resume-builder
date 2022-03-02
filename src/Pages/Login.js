@@ -14,8 +14,15 @@ const Login = () => {
 
   const dispatch = useDispatch();
 
-  const Login = (e) => {
+  const LoginTpApp = (e) => {
     e.preventDefault();
+
+    if (!Email) {
+      return alert("Please enter your email.");
+    }
+    if (!Password) {
+      return alert("Please enter your password.");
+    }
 
     signInWithEmailAndPassword(auth, Email, Password)
       .then((userCredential) => {
@@ -32,13 +39,15 @@ const Login = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        //..
+        // push history to dashboard
+        if (error) {
+          return alert("Email or password are incorrect.");
+        } else {
+          navigate("/dashbordredirect");
+        }
         console.log(errorCode);
         console.log(errorMessage);
       });
-
-    // push history to dashboard
-    navigate("/");
   };
   return (
     <div className="login_div contentcenter padtop20">
@@ -76,7 +85,7 @@ const Login = () => {
 
           <span className="padtop20 padLeft20 bold">
             Don't have an account?
-            <Link to="/signup" className="link bold blue underlined">
+            <Link to="/signup" className="link bold blue underlined padleft4">
               Signup now!
             </Link>
           </span>
@@ -85,7 +94,7 @@ const Login = () => {
             <Link to="/" className="link">
               <Button variant="outlined">cancel</Button>
             </Link>
-            <Button onClick={Login} variant="outlined">
+            <Button onClick={LoginTpApp} variant="outlined">
               login
             </Button>
           </div>
