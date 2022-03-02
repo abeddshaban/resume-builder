@@ -23,8 +23,6 @@ import { signOut, onAuthStateChanged } from "firebase/auth";
 import { login, logout, selectUser } from "../Redux/userSlice";
 import { auth } from "../Firebase/firebase";
 
-const drawerWidth = 240;
-
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -33,12 +31,12 @@ const AppBar = styled(MuiAppBar, {
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
-    width: `calc(100% - ${drawerWidth}px)`,
+    width: `calc(100% - 240px)`,
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    marginRight: drawerWidth,
+    marginRight: 240,
   }),
 }));
 
@@ -71,7 +69,7 @@ export default function PersistentDrawerRight() {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (userState) {
+      if (userState !== null) {
         // user is  logged in
         dispatch(
           login({
@@ -134,10 +132,10 @@ export default function PersistentDrawerRight() {
 
         <Drawer
           sx={{
-            width: drawerWidth,
+            width: 240,
             flexShrink: 0,
             "& .MuiDrawer-paper": {
-              width: drawerWidth,
+              width: 240,
             },
           }}
           variant="persistent"
@@ -181,8 +179,8 @@ export default function PersistentDrawerRight() {
                 </ListItem>
               </Link>
             ) : (
-              <ListItem sx={{ color: "#ff0000" }} button>
-                <ListItemText onClick={logoutOfApp} primary="logout" />
+              <ListItem onClick={logoutOfApp} sx={{ color: "#ff0000" }} button>
+                <ListItemText primary="logout" />
               </ListItem>
             )}
           </List>

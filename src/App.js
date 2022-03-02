@@ -10,8 +10,12 @@ import Signup from "./Pages/Signup";
 import FormStepper from "./Components/FormStepper";
 import PDFresume from "./Components/PDFresume";
 import DashbordRedirect from "./Components/DashbordRedirect";
+import { useSelector } from "react-redux";
+import { selectUser } from "./Redux/userSlice";
 
 function App() {
+  const user = useSelector(selectUser);
+
   return (
     <div className="App">
       <NavBar />

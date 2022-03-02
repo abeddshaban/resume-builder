@@ -5,7 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../Redux/userSlice";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "../Firebase/firebase";
+import { auth, db } from "../Firebase/firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 const Signup = () => {
   const [FirstName, setFirstName] = useState("");
@@ -31,6 +32,7 @@ const Signup = () => {
         }).then(() => {
           console.log("profile status updated");
 
+          // redux login
           dispatch(
             login({
               email: user.email,
@@ -39,8 +41,15 @@ const Signup = () => {
             })
           );
         });
-
-        console.log(user);
+        // add user to users collection
+        const userCollection = doc(db, "users", Email);
+        // await
+        setDoc(userCollection, {
+          FirstName: FirstName,
+          LastName: LastName,
+          email: Email,
+          resumes: [],
+        });
       })
       .catch((error) => {
         const errorCode = error.code;
