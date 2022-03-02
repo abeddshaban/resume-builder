@@ -16,7 +16,9 @@ import Checkbox from "@mui/material/Checkbox";
 import Autocomplete from "@mui/material/Autocomplete";
 
 import "./Styles/FormStepper.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectUser } from "../Redux/userSlice";
 
 const QontoStepIconRoot = styled("div")(({ theme, ownerState }) => ({
   color: theme.palette.mode === "dark" ? theme.palette.grey[700] : "#eaeaf0",
@@ -134,6 +136,8 @@ ColorlibStepIcon.propTypes = {
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function CustomizedSteppers() {
+  const user = useSelector(selectUser);
+
   const skillsdic = [
     {
       name: "HTML",
@@ -544,7 +548,7 @@ function CustomizedSteppers() {
     console.log("create cv");
   };
 
-  console.log(data);
+  // console.log(data);
   const forms = [
     {
       label: "Profile",
@@ -1274,82 +1278,92 @@ function CustomizedSteppers() {
     },
   ];
   return (
-    <div className="form_stepper ">
-      <br />
-      <br />
-      <br />
-      <Box
-        sx={{
-          "& .MuiTextField-root": { m: 1, width: "25ch" },
-        }}
-        className="center_text"
-        component="form"
-        noValidate
-        autoComplete="off"
-      >
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-evenly",
-            flexWrap: "wrap",
-            paddingLeft: "10px",
-            "& > :not(style)": {
-              m: 1,
-              width: 340,
-            },
-          }}
-        >
-          <Card
+    <>
+      {!user ? (
+        <Navigate to="/login" />
+      ) : (
+        <div className="form_stepper ">
+          <br />
+          <br />
+          <br />
+          <Box
             sx={{
-              paddingTop: "40px",
-              paddingBottom: "40px",
+              "& .MuiTextField-root": { m: 1, width: "25ch" },
             }}
-            variant="outlined"
+            className="center_text"
+            component="form"
+            noValidate
+            autoComplete="off"
           >
-            <h2>{forms[activeStep].label}</h2>
-            <div>{forms[activeStep].input}</div>
-          </Card>
-        </Box>
-      </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-evenly",
+                flexWrap: "wrap",
+                paddingLeft: "10px",
+                "& > :not(style)": {
+                  m: 1,
+                  width: 340,
+                },
+              }}
+            >
+              <Card
+                sx={{
+                  paddingTop: "40px",
+                  paddingBottom: "40px",
+                }}
+                variant="outlined"
+              >
+                <h2>{forms[activeStep].label}</h2>
+                <div>{forms[activeStep].input}</div>
+              </Card>
+            </Box>
+          </Box>
 
-      <footer className="form_footer">
-        {/* back btn */}
-        {activeStep === 0 ? (
-          <Button variant="outlined" size="medium" disabled>
-            Back
-          </Button>
-        ) : (
-          <Button
-            variant="contained"
-            size="medium"
-            onClick={() => {
-              handleBack();
-            }}
-          >
-            Back
-          </Button>
-        )}
+          <footer className="form_footer">
+            {/* back btn */}
+            {activeStep === 0 ? (
+              <Button variant="outlined" size="medium" disabled>
+                Back
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                size="medium"
+                onClick={() => {
+                  handleBack();
+                }}
+              >
+                Back
+              </Button>
+            )}
 
-        {/* next / create btn */}
-        {activeStep === 7 ? (
-          <Link to={{ pathname: "/resume" }} className="link">
-            <Button onClick={CreateResume} variant="contained" size="medium">
-              create
-            </Button>
-          </Link>
-        ) : (
-          <Button
-            variant="contained"
-            size="medium"
-            onClick={() => {
-              handleNext();
-            }}
-          >
-            Next
-          </Button>
-        )}
-      </footer>
-    </div>
+            {/* next / create btn */}
+            {activeStep === 7 ? (
+              <Link to={{ pathname: "/resume" }} className="link">
+                <Button
+                  onClick={CreateResume}
+                  variant="contained"
+                  size="medium"
+                >
+                  create
+                </Button>
+              </Link>
+            ) : (
+              <Button
+                variant="contained"
+                size="medium"
+                onClick={() => {
+                  handleNext();
+                }}
+              >
+                Next
+              </Button>
+            )}
+          </footer>
+        </div>
+      )}
+    </>
   );
 }
 
