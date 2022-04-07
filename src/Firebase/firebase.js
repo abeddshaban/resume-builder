@@ -5,13 +5,13 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAfSC2E5ZFcsaUOUbHCmOKqEx7t1cL_Shc",
-  authDomain: "resume-builder-804fc.firebaseapp.com",
-  projectId: "resume-builder-804fc",
-  storageBucket: "resume-builder-804fc.appspot.com",
-  messagingSenderId: "227426913816",
-  appId: "1:227426913816:web:c97032e77d7ee7549e3d6d",
-  measurementId: "G-G3CFZJT2CK",
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: "",
 };
 
 // const analytics = getAnalytics(firebaseApp);
